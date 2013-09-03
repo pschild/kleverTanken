@@ -1,0 +1,24 @@
+<div class="detail-row large-12 small-12 columns">
+	<div class="gasstation-logo small-2 columns">
+		<img src="resources/images/<%- entryData.gasstation.name.toLowerCase() %>.png" />
+	</div>
+	<div class="small-10 columns">
+		<div class="gasstation-name"><%- entryData.gasstation.name %></div>
+		<div class="gasstation-location"><%- entryData.location.street %>, <%- entryData.location.city %></div>
+		<a href="http://maps.google.de/maps?q=<%- entryData.location.latitude %>,<%- entryData.location.longitude %>" target="_blank">In Google Maps ansehen</a>
+	</div>
+</div>
+
+<div class="detail-row small-12 columns">
+	<%- entryData.fuelsort.name %> für <span class="fuelsort-price"><%- entryData.entry.price %> €</span>
+</div>
+
+<div class="detail-row small-12 columns">
+	Datum: <%- formattedDateString %>
+</div>
+
+<div class="detail-row small-12 columns">
+	<b>Statistiken für "<%- entryData.fuelsort.name %>"</b>
+	<div class="fuelsort-average-price">&empty; <%- entryData.fuelsort.averagePriceSince14Days %> € (letzte 14 Tage)</div>
+	<div class="fuelsort-average-price">&empty; <%- entryData.fuelsort.averagePrice %> € (gesamt)</div>
+</div>
