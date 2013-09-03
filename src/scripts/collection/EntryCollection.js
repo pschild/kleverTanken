@@ -1,17 +1,9 @@
 define(
-	['jquery', 'underscore', 'collection/Collection', 'Config'],
-	function($, _, Collection, config) {
+	['jquery', 'underscore', 'collection/Collection', 'mixin/DatetimeMixin', 'Config'],
+	function($, _, Collection, datetimeMixin, config) {
 		'use strict';
 
 		var EntriesCollection = Collection.extend({
-			addData: function(models) {
-				Collection.prototype.addData.call(this, models);
-
-				this.sortBy(function(item) {
-					return -new Date(item.datetime);
-				});
-			},
-
 			load: function(options) {
 				var that = this;
 

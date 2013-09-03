@@ -2,10 +2,11 @@ define(
 	[
 		'underscore',
 		'viewModel/ViewModel',
+		'mixin/DatetimeMixin',
 		'collection/EntryCollection', 'collection/FuelsortCollection', 'collection/GasstationCollection', 'collection/LocationCollection',
 		'view/EntryListView'
 	],
-	function(_, ViewModel, EntryCollection, FuelsortCollection, GasstationCollection, LocationCollection, EntryListView) {
+	function(_, ViewModel, datetimeMixin, EntryCollection, FuelsortCollection, GasstationCollection, LocationCollection, EntryListView) {
 		'use strict';
 
 		var EntryListViewModel = ViewModel.extend({
@@ -19,6 +20,10 @@ define(
 			},
 
 			doPopulate: function() {
+				EntryCollection.sortBy(function(item) {
+					return -datetimeMixin.convertDateStringToDate(item.datetime);
+				});
+
 				this.mainView.populate({
 					entries: this.buildEntries_(EntryCollection.getData())
 				});
