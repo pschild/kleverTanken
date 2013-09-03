@@ -1,24 +1,26 @@
 <div id="entry-form">
-	<div class="large-12 columns">
-		<h1>Neuer Eintrag</h1>
-	</div>
+	<h1>Neuer Eintrag</h1>
 
-	<div id="gasstation-chooser-container">
-		<select id="gasstation-chooser"></select>
-		<select id="location-chooser"></select>
+	<div id="row gasstation-chooser-container">
+		<select id="gasstation-chooser" class="form-control"></select>
+		<select id="location-chooser" class="form-control"></select>
 	</div>
 
 	<div class="fuelsort-price-container"></div>
 
-	<div class="large-12 columns">
-		<label for="datetime">Datum & Uhrzeit</label>
-		<input type="text" id="datetime" />
+	<div class="row">
+		<label>
+			Datum & Uhrzeit
+			<input type="text" id="datetime" class="form-control" />
+		</label>
 	</div>
 
-	<div class="small-6 columns">
-		<button id="save-entry-button" class="small icon-save">Speichern</button>
-	</div>
-	<div class="small-6 columns">
-		<button id="cancel-edit-button" class="small icon-cancel">Abbrechen</button>
+	<div class="row">
+		<div class="col-xs-6">
+			<button id="save-entry-button" class="btn btn-large btn-primary icon-save">Speichern</button>
+		</div>
+		<div class="col-xs-6">
+			<button id="cancel-edit-button" class="btn btn-large btn-danger icon-cancel">Abbrechen</button>
+		</div>
 	</div>
 </div>

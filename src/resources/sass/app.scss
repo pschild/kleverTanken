@@ -10,14 +10,15 @@
 @import "mixin/font-icons";
 
 /* views */
+@import "view/index";
+@import "view/imprint";
+@import "view/menu";
+@import "view/statistic";
+@import "view/toolbar";
+
 @import "view/entryCreator/entryForm";
 @import "view/entryCreator/fuelsortPriceRow";
 @import "view/entryDetail/detailInformation";
 @import "view/entryDetail/entryDetail";
 @import "view/entryList/entryItem";
 @import "view/entryList/entryList";
-
-@import "view/imprint";
-@import "view/menu";
-@import "view/statistic";
-@import "view/toolbar";

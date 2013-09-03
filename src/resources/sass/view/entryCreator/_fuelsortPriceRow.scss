@@ -1,0 +1,20 @@
+.fuelsort-price-row {
+  padding-top: 10px;
+
+  .fuelsort-label {
+	display: inline-block;
+  }
+
+  .price-container {
+	text-align: center;
+
+	& * {
+	  display: inline-block;
+	}
+
+	.price {
+	  font-size: 20px;
+	  font-weight: bold;
+	}
+  }
+}
