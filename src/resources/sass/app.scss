@@ -5,6 +5,9 @@
 @import "config";
 
 /* jQuery-Plugins */
+@import "lib/mobiscroll/_mobiscroll.core";
+@import "lib/mobiscroll/_mobiscroll.android-ics";
+@import "lib/mobiscroll/_mobiscroll.animation";
 
 /* mixins */
 @import "mixin/font-icons";

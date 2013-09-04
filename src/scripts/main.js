@@ -5,6 +5,11 @@ require.config({
 		jquery: 'lib/jquery-1.9.1.min',
 		underscore: 'lib/underscore-min',
 		text: 'lib/text-2.0.7',
+
+		/* jQuery-Plugins */
+		'mobiscroll.core': 'lib/mobiscroll/mobiscroll.core',
+		'mobiscroll.datetime': 'lib/mobiscroll/mobiscroll.datetime',
+		'mobiscroll.i18n.de': 'lib/mobiscroll/i18n/mobiscroll.i18n.de',
 		
 		templates: '../resources/templates'
 	},
@@ -12,6 +17,19 @@ require.config({
 	shim: {
 		underscore: {
 			exports: '_'
+		},
+
+		'mobiscroll.core': {
+			deps: ['jquery'],
+			exports: '$'
+		},
+		'mobiscroll.datetime': {
+			deps: ['mobiscroll.core'],
+			exports: '$'
+		},
+		'mobiscroll.i18n.de': {
+			deps: ['mobiscroll.core'],
+			exports: '$'
 		}
 	},
 	

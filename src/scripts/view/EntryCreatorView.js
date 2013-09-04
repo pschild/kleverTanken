@@ -2,7 +2,8 @@ define(
 	[
 		'jquery', 'underscore', 'view/View',
 		'mixin/DatetimeMixin',
-		'text!templates/entryCreator/entryForm.html', 'text!templates/entryCreator/fuelsortPriceRow.html'
+		'text!templates/entryCreator/entryForm.html', 'text!templates/entryCreator/fuelsortPriceRow.html',
+		'mobiscroll.core', 'mobiscroll.datetime', 'mobiscroll.i18n.de'
 	],
 	function($, _, View, datetimeMixin, entryCreatorTemplate, fuelsortPriceRowTemplate) {
 		'use strict';
@@ -68,6 +69,8 @@ define(
 				this.$element.html(
 					_.template(entryCreatorTemplate)
 				);
+
+				this.initDatetimePicker_();
 			},
 
 			populateEntry_: function() {
@@ -116,6 +119,24 @@ define(
 				/* Workaround: unbind and bind again, because at the beginning the increment und decrement buttons are not available */
 				this.doUnbind();
 				this.doBind();
+			},
+
+			initDatetimePicker_: function() {
+				/* workaround mobiscroll: makes the datetime-field loose the focus whenever it is clicked */
+				$('#datetime').focus(function() {
+					$('#datetime').blur();
+				});
+
+				$('#datetime').mobiscroll().datetime({
+					showNow: true,
+					maxDate: new Date(),
+					startYear: new Date().getFullYear() - 2,
+					theme: 'android-ics light',
+					lang: 'de',
+					display: 'modal',
+					animate: 'pop',
+					mode: 'scroller'
+				});
 			},
 
 			getGasstationChooserChangeHandler_: function() {
