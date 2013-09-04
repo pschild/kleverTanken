@@ -2,7 +2,7 @@
 	<div id="entry-<%- entry.id %>" class="entry-container">
 		<img src="resources/images/<%- gasstation.name.toLowerCase() %>.png" />
 		<div class="fuelsort-label"><%- fuelsort.name %></div>
-		<div class="price-label"><%- entry.price %></div>
+		<div class="price-label"><%- entry.price.toFixed(2) %></div>
 		<div class="elapsed-time-label"><%- elapsedTime %></div>
 	</div>
 </a>

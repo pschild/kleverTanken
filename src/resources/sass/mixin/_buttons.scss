@@ -1,0 +1,23 @@
+.icon-save::before {
+  @include icon('<', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-cancel::before {
+  @include icon('3', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-edit::before {
+  @include icon('5', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-delete::before {
+  @include icon('/', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}

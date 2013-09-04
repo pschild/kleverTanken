@@ -1,10 +1,14 @@
-<div class="row fuelsort-price-row">
-	<div class="checkbox-container">
-		<input type="checkbox" id="fuesort-checkbox-<%- id %>" value="<%- id %>" />
-		<label for="fuesort-checkbox-<%- id %>"></label>
+<div class="row form-row fuelsort-price-row">
+	<div class="col-xs-6">
+		<div class="checkbox-container">
+			<input type="checkbox" id="fuelsort-checkbox-<%- id %>" value="<%- id %>" />
+			<label for="fuelsort-checkbox-<%- id %>"></label>
+
+			<div class="fuelsort-label"><%- name %></div>
+		</div>
 	</div>
-	<div class="fuelsort-label"><%- name %></div>
-	<div class="price-container">
+
+	<div class="col-xs-6 price-container">
 		<button class="btn btn-large btn-primary decrement-price-button">-</button>
 		<div class="price">1.11</div>
 		<button class="btn btn-large btn-primary increment-price-button">+</button>

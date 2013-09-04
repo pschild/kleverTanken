@@ -116,8 +116,12 @@ define(
 
 			handleGasstationChooserChange_: function(value) {
 				if (value > 0) {
+					$('#location-chooser').slideDown();
 					this.mainView.populateLocations();
+					return;
 				}
+
+				$('#location-chooser').slideUp();
 			},
 
 			handleFuelsortLabelClick_: function($checkbox) {

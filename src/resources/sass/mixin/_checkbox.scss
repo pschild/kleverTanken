@@ -1,0 +1,47 @@
+@mixin checkbox($size) {
+  display: inline-block;
+
+  input[type=checkbox] {
+	display: none;
+  }
+
+  input[type=checkbox]:checked + label:after {
+	opacity: 1;
+  }
+
+  label {
+	cursor: pointer;
+	position: absolute;
+	width: $size;
+	height: $size;
+	top: 0px;
+	border-radius: $size / 5;
+
+	background: -webkit-linear-gradient(top, $checkbox-background-color-from 0%, $checkbox-background-color-to 100%);
+	background: -moz-linear-gradient(top, $checkbox-background-color-from 0%, $checkbox-background-color-to 100%);
+	background: -o-linear-gradient(top, $checkbox-background-color-from 0%, $checkbox-background-color-to 100%);
+	background: -ms-linear-gradient(top, $checkbox-background-color-from 0%, $checkbox-background-color-to 100%);
+	background: linear-gradient(top, $checkbox-background-color-from 0%, $checkbox-background-color-to 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$checkbox-background-color-from, endColorstr=$checkbox-background-color-to,GradientType=0);
+
+	&:after {
+	  opacity: 0;
+	  content: '';
+	  position: absolute;
+	  width: $size / 1.5;
+	  height: $size / 2.5;
+	  background: transparent;
+	  top: $size / 5;
+	  left: $size / 5;
+	  border: $size / 6.66 solid $checkbox-background-color-check;
+	  border-top: none;
+	  border-right: none;
+
+	  -webkit-transform: rotate(-45deg);
+	  -moz-transform: rotate(-45deg);
+	  -o-transform: rotate(-45deg);
+	  -ms-transform: rotate(-45deg);
+	  transform: rotate(-45deg);
+	}
+  }
+}

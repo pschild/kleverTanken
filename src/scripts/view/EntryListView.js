@@ -35,7 +35,7 @@ define(
 				_.each(entries, function(entryData) {
 					that.entries_.push(entryData);
 
-					$('.entry-list').append(
+					$('.entry-list-container').append(
 						_.template(
 							entryItemTemplate,
 							{

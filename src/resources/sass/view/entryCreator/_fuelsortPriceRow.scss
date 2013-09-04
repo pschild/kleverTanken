@@ -1,8 +1,11 @@
 .fuelsort-price-row {
-  padding-top: 10px;
+  .checkbox-container {
+	@include checkbox($checkbox-default-size);
+  }
 
   .fuelsort-label {
-	display: inline-block;
+  	margin-left: 30px;
+	cursor: pointer;
   }
 
   .price-container {
