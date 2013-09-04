@@ -1,45 +1,47 @@
 .entry-item {
-  color: #000;
+  color: $app-primary-font-color;
 
   .entry-container {
-	border: 1px solid #cacaca;
+	border: 1px solid darken($app-secondary-background-color, 20%);
 	border-radius: 10px;
-	background-color: #f5f5f5;
+	background-color: $app-secondary-background-color;
 	padding: 10px;
 	margin-bottom: 10px;
 	height: 150px;
 
 	&:hover {
-	  border-color: #2a6496;
+	  border-color: $app-primary-background-color;
 	}
 
-	img {
+	.gasstation-image-container {
 	  position: absolute;
-	  top: 8px;
-	  left: 25px;
+	  width: 40px;
+
+	  img {
+		width: 100%;
+	  }
 	}
 
 	.fuelsort-label {
 	  position: absolute;
-	  top: 20px;
-	  right: 25px;
-	  font-size: 20px;
-	  font-weight: bold;
+	  top: 50px;
+	  left: 25px;
+	  font-size: $app-small-font-size;
 	}
 
 	.price-label {
 	  position: absolute;
-	  top: 48px;
-	  right: 25px;
-	  font-size: 40px;
+	  top: 70px;
+	  left: 25px;
+	  font-size: $app-large-font-size;
 	  font-weight: bold;
 	}
 
 	.elapsed-time-label {
 	  position: absolute;
-	  bottom: 20px;
-	  right: 25px;
-	  font-size: 12px;
+	  top: 125px;
+	  left: 25px;
+	  font-size: $app-tiny-font-size;
 	}
   }
 }
