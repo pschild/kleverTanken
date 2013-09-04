@@ -2,17 +2,19 @@ define(
 	[
 		'jquery', 'underscore', 'Router',
 		'viewModel/ToolbarViewModel', 'viewModel/MenuViewModel',
-		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection'
+		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
+		'nprogress'
 	],
 	function($, _, Router, ToolbarViewModel, MenuViewModel, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection) {
 		'use strict';
 	
 		function Application(options) {
-			this.initialize_(options);
 			this.entryCollectionLoaded_ = false;
 			this.gasstationCollectionLoaded_ = false;
 			this.locationCollectionLoaded_ = false;
 			this.fuelsortCollectionLoaded_ = false;
+
+			this.initialize_(options);
 		}
 		
 		_.extend(Application.prototype, {
@@ -28,21 +30,12 @@ define(
 
 			bootstrap: function() {
 				this.loadCollections();
-				this.showToolbar();
-				this.shoMenu();
-			},
-
-			showToolbar: function() {
-				var toolbarViewModel = new ToolbarViewModel();
-				toolbarViewModel.getMainView().show();
-			},
-
-			shoMenu: function() {
-				var menuViewModel = new MenuViewModel();
-				menuViewModel.getMainView().show();
 			},
 			
 			loadCollections: function() {
+				NProgress.configure({ showSpinner: false });
+				NProgress.start();
+
 				EntryCollection.load({
 					success: this.handleEntryCollectionLoaded_,
 					scope: this
@@ -85,6 +78,7 @@ define(
 			},
 
 			checkCollectionsLoaded_: function() {
+				NProgress.inc(0.3);
 				if (
 					this.gasstationCollectionLoaded_
 					&& this.entryCollectionLoaded_
@@ -96,7 +90,31 @@ define(
 			},
 
 			launchApplication: function() {
+				NProgress.done();
+
 				Router.start();
+				this.showToolbar_();
+				this.showMenu_();
+				this.showContent_();
+				this.hideLoadingIndicator_();
+			},
+
+			showToolbar_: function() {
+				var toolbarViewModel = new ToolbarViewModel();
+				toolbarViewModel.getMainView().show();
+			},
+
+			showMenu_: function() {
+				var menuViewModel = new MenuViewModel();
+				menuViewModel.getMainView().show();
+			},
+
+			showContent_: function() {
+				$('#app-container').show();
+			},
+
+			hideLoadingIndicator_: function() {
+				console.info('TODO: loading indicator...');
 			}
 		});
 		

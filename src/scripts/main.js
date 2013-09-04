@@ -10,6 +10,7 @@ require.config({
 		'mobiscroll.core': 'lib/mobiscroll/mobiscroll.core',
 		'mobiscroll.datetime': 'lib/mobiscroll/mobiscroll.datetime',
 		'mobiscroll.i18n.de': 'lib/mobiscroll/i18n/mobiscroll.i18n.de',
+		nprogress: 'lib/nprogress',
 		
 		templates: '../resources/templates'
 	},
