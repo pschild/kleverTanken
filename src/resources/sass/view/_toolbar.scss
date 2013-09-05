@@ -3,6 +3,12 @@
 	height: $toolbar-height;
 	background-color: $toolbar-background-color;
 	color: $toolbar-font-color;
-	font-size: $app-large-font-size;
+
+	.toolbar-headline {
+	  display: inline-block;
+	  font-size: $app-medium-font-size;
+	  margin-top: 15px;
+	  margin-left: 15px;
+	}
   }
 }

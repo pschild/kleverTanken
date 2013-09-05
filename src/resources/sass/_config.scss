@@ -26,3 +26,16 @@ $checkbox-default-size: 20px;
 $checkbox-background-color-from: #222;
 $checkbox-background-color-to: #45484d;
 $checkbox-background-color-check: #fcfff4;
+
+/* menu */
+$menu-background-color: $app-primary-background-color;
+$menu-hover-background-color: #47a3da;
+$menu-active-background-color: #106FA8;
+$menu-active-font-color: #47a3da;
+$menu-border-color: $app-primary-background-color;
+
+$menu-width: 250px;
+$menu-transition-time: 0.3s;
+$menu-transition-type: ease;
+
+// 47a3da, 106FA8

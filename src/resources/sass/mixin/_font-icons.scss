@@ -15,3 +15,47 @@
   content: $char;
   font-size: $fontSize;
 }
+
+.icon-save::before {
+  @include icon('<', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-cancel::before {
+  @include icon('3', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-edit::before {
+  @include icon('5', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-delete::before {
+  @include icon('/', $default-icon-font-size);
+  font-weight: normal;
+  margin-right: 7px;
+}
+
+.icon-menu-toggle::before {
+  @include icon(',', 27px);
+}
+
+.icon-overview::before {
+  @include icon('*', $default-icon-font-size);
+}
+
+.icon-new::before {
+  @include icon('!', $default-icon-font-size);
+}
+
+.icon-statistics::before {
+  @include icon('$', $default-icon-font-size);
+}
+
+.icon-imprint::before {
+  @include icon('F', $default-icon-font-size);
+}
