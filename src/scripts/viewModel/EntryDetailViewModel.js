@@ -3,9 +3,10 @@ define(
 		'underscore',
 		'viewModel/ViewModel',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/FuelsortCollection', 'collection/LocationCollection',
-		'view/EntryDetailView'
+		'view/EntryDetailView',
+		'alertify'
 	],
-	function(_, ViewModel, EntryCollection, GasstationCollection, FuelsortCollection, LocationCollection, EntryDetailView) {
+	function(_, ViewModel, EntryCollection, GasstationCollection, FuelsortCollection, LocationCollection, EntryDetailView, alertify) {
 		'use strict';
 
 		var EntryDetailViewModel = ViewModel.extend({
@@ -44,7 +45,7 @@ define(
 			},
 
 			handleDeleteEntrySuccess_: function() {
-				alert('Erfolgreich gelöscht!');
+				alertify.success('Eintrag gelöscht<br><a href="#">Rückgängig machen</a>');
 				window.location.href = '#entryList';
 			}
 

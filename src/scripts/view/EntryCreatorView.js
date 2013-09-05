@@ -31,12 +31,12 @@ define(
 
 			doUnbind: function() {
 				$('#gasstation-chooser').off('change');
-				$('#save-entry-button').off('click');
-				$('#cancel-edit-button').off('click');
+				$('#save-entry-button').unbind();
+				$('#cancel-edit-button').unbind();
 
-				$('.decrement-price-button').off('click');
-				$('.increment-price-button').off('click');
-				$('.fuelsort-label').off('click');
+				$('.decrement-price-button').unbind();
+				$('.increment-price-button').unbind();
+				$('.fuelsort-label').unbind();
 			},
 
 			doPopulate: function(data) {

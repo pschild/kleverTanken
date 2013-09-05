@@ -17,7 +17,7 @@ define(
 			},
 
 			doUnbind: function() {
-				$('#load-more-button').off('click');
+				$('#load-more-button').unbind();
 			},
 
 			doPopulate: function(data) {

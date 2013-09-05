@@ -12,6 +12,7 @@ require.config({
 		'mobiscroll.i18n.de': 'lib/mobiscroll/i18n/mobiscroll.i18n.de',
 		'jquery-fast-click': 'lib/jquery-fast-click',
 		nprogress: 'lib/nprogress',
+		alertify: 'lib/alertify',
 
 		templates: '../resources/templates'
 	},
@@ -34,6 +35,10 @@ require.config({
 			exports: '$'
 		},
 		'jquery-fast-click': {
+			deps: ['jquery'],
+			exports: '$'
+		},
+		alertify: {
 			deps: ['jquery'],
 			exports: '$'
 		}

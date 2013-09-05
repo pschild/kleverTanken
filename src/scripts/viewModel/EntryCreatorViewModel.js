@@ -4,9 +4,10 @@ define(
 		'viewModel/ViewModel',
 		'mixin/DatetimeMixin',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
-		'view/EntryCreatorView'
+		'view/EntryCreatorView',
+		'alertify'
 	],
-	function(_, ViewModel, datetimeMixin, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection, EntryCreatorView) {
+	function(_, ViewModel, datetimeMixin, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection, EntryCreatorView, alertify) {
 		'use strict';
 
 		var EntryCreatorViewModel = ViewModel.extend({
@@ -37,7 +38,6 @@ define(
 			},
 
 			validateForm_: function() {
-				console.info('TODO: Datum validieren');
 				return parseInt($('#gasstation-chooser').val()) > 0
 					&& parseInt($('#location-chooser').val()) > 0
 					&& $('#datetime').val() !== ''
@@ -84,7 +84,7 @@ define(
 
 			handleSaveEntryButtonClick_: function(entry) {
 				if (!this.validateForm_()) {
-					console.warn('Form is not valid!');
+					alertify.error('<b>Da stimmt was nicht...</b><br>Bitte überprüfe deine Eingaben');
 					return false;
 				}
 
@@ -109,7 +109,7 @@ define(
 			},
 
 			handleSaveEntrySuccess_: function() {
-				alert('Erfolgreich gespeichert!');
+				alertify.success('<b>(-:</b><br>Eintrag gespeichert');
 				window.location.href = '#entryList';
 			},
 

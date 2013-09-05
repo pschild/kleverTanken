@@ -18,8 +18,8 @@ define(
 			},
 
 			doUnbind: function() {
-				$('#edit-entry-button').off('click');
-				$('#delete-entry-button').off('click');
+				$('#edit-entry-button').unbind();
+				$('#delete-entry-button').unbind();
 			},
 
 			doPopulate: function(data) {
