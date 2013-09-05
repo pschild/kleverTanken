@@ -90,7 +90,10 @@ define(
 
 				if (entry) {
 					EntryCollection.update({
-						data: _.extend(entry, this.buildEntries_()[0]),
+						data: {
+							entryId: entry.id,
+							entryData: this.buildEntries_()
+						},
 						success: this.handleSaveEntrySuccess_,
 						scope: this
 					});

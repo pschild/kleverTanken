@@ -38,6 +38,14 @@ define(
 				return this.data_;
 			},
 
+			updateWhere: function(searchKey, data) {
+				var model = this.findWhere('id', searchKey);
+				if (model) {
+					_.extend(model, data);
+					return model;
+				}
+			},
+
 			findWhere: function(searchKey, searchValue, findAll) {
 				if (!this.getData() || this.getData().length === 0) {
 					return undefined;

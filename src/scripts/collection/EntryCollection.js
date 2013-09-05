@@ -60,15 +60,23 @@ define(
 				var successCallback = options.success || $.noop;
 				var errorCallback = options.error || $.noop;
 				var scope = options.scope || this;
-				var model = options.data || {};
 
+				var entryId = options.data.entryId;
+				if (!entryId) {
+					console.error('No entryId given.');
+					return;
+				}
+				var newModel = options.data.entryData[0] || {};
+
+				var that = this;
 				$.ajax({
-					url: 'data/php/entry.php/entry/' + model.id,
-					data: JSON.stringify(model),
+					url: 'data/php/entry.php/entry/' + entryId,
+					data: JSON.stringify(newModel),
 					type: 'PUT',
 					dataType: 'json',
 					contentType: 'application/json',
 					success: function(response) {
+						that.updateWhere(entryId, newModel);
 						successCallback.call(scope, response);
 					},
 					error: function(response) {
