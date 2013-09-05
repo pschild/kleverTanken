@@ -21,12 +21,12 @@ define(
 
 			doBind: function() {
 				$('#gasstation-chooser').on('change', this.getGasstationChooserChangeHandler_());
-				$('#save-entry-button').on('click', this.getSaveEntryButtonClickHandler_());
-				$('#cancel-edit-button').on('click', this.getCancelEditButtonClickHandler_());
+				$('#save-entry-button').fastClick(this.getSaveEntryButtonClickHandler_());
+				$('#cancel-edit-button').fastClick(this.getCancelEditButtonClickHandler_());
 
-				$('.decrement-price-button').on('click', this.getDecrementPriceButtonClickHandler_());
-				$('.increment-price-button').on('click', this.getIncrementPriceButtonClickHandler_());
-				$('.fuelsort-label').on('click', this.getFuelsortLabelClickHandler_());
+				$('.decrement-price-button').fastClick(this.getDecrementPriceButtonClickHandler_());
+				$('.increment-price-button').fastClick(this.getIncrementPriceButtonClickHandler_());
+				$('.fuelsort-label').fastClick(this.getFuelsortLabelClickHandler_());
 			},
 
 			doUnbind: function() {

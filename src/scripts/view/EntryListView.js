@@ -13,7 +13,7 @@ define(
 			entries_: [],
 
 			doBind: function() {
-				$('#load-more-button').on('click', this.getLoadMoreButtonClickHandler_());
+				$('#load-more-button').fastClick(this.getLoadMoreButtonClickHandler_());
 			},
 
 			doUnbind: function() {

@@ -1,3 +1,15 @@
+.loading-indicator-wrapper {
+  position: absolute;
+  width: 100%;
+  padding-top: 10%;
+  text-align: center;
+
+  .loading-information {
+	padding-top: 20px;
+  }
+}
+
 #app-container {
-	display: none;
+  -webkit-user-select: none;
+  display: none;
 }

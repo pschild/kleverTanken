@@ -8,6 +8,7 @@ define(
 		}
 
 		_.extend(View.prototype, EventsMixin, {
+			$element: undefined,
 
 			initialize_: function(options) {
 				this.doInitialize(options);
@@ -34,6 +35,12 @@ define(
 			},
 
 			show: function() {
+				/*
+				this.$element.fadeOut();
+				this.render();
+				this.$element.fadeIn();
+				*/
+				console.info('TODO: hier könnte man noch animationen einbauen (s.o.)');
 				this.render();
 				this.bind();
 			},

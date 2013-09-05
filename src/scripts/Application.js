@@ -3,7 +3,7 @@ define(
 		'jquery', 'underscore', 'Router',
 		'viewModel/ToolbarViewModel', 'viewModel/MenuViewModel',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
-		'nprogress'
+		'nprogress', 'jquery-fast-click'
 	],
 	function($, _, Router, ToolbarViewModel, MenuViewModel, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection) {
 		'use strict';
@@ -78,7 +78,7 @@ define(
 			},
 
 			checkCollectionsLoaded_: function() {
-				NProgress.inc(0.3);
+				NProgress.inc(0.25);
 				if (
 					this.gasstationCollectionLoaded_
 					&& this.entryCollectionLoaded_
@@ -110,11 +110,13 @@ define(
 			},
 
 			showContent_: function() {
-				$('#app-container').show();
+				$('#app-container').fadeIn(500);
 			},
 
 			hideLoadingIndicator_: function() {
-				console.info('TODO: loading indicator...');
+				$('.loading-indicator-wrapper').fadeOut(500, function() {
+					$(this).remove();
+				});
 			}
 		});
 		

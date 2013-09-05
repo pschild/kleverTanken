@@ -10,8 +10,9 @@ require.config({
 		'mobiscroll.core': 'lib/mobiscroll/mobiscroll.core',
 		'mobiscroll.datetime': 'lib/mobiscroll/mobiscroll.datetime',
 		'mobiscroll.i18n.de': 'lib/mobiscroll/i18n/mobiscroll.i18n.de',
+		'jquery-fast-click': 'lib/jquery-fast-click',
 		nprogress: 'lib/nprogress',
-		
+
 		templates: '../resources/templates'
 	},
 	
@@ -30,6 +31,10 @@ require.config({
 		},
 		'mobiscroll.i18n.de': {
 			deps: ['mobiscroll.core'],
+			exports: '$'
+		},
+		'jquery-fast-click': {
+			deps: ['jquery'],
 			exports: '$'
 		}
 	},

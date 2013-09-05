@@ -1,0 +1,69 @@
+@mixin single-spinner($radius, $border-width, $duration) {
+  height: $radius;
+  width: $radius;
+  margin: 0 auto;
+  position: relative;
+  border: $border-width solid lighten($app-primary-background-color, 40%);
+  border-radius: 100%;
+  -webkit-animation: rotation $duration infinite linear;
+  -moz-animation: rotation $duration infinite linear;
+  -o-animation: rotation $duration infinite linear;
+  animation: rotation $duration infinite linear;
+
+  &:before {
+	content: '';
+	display: block;
+	position: absolute;
+	top: -$border-width;
+	height: 100%;
+	width: 100%;
+	border-top: $border-width solid $app-primary-background-color;
+	border-left: $border-width solid transparent;
+	border-bottom: $border-width solid transparent;
+	border-right: $border-width solid transparent;
+	border-radius: 100%;
+  }
+}
+
+@mixin double-spinner($radius, $border-width, $duration) {
+  margin: auto;
+  height: $radius;
+  width: $radius;
+  background: none;
+  border-radius: 100px;
+  border-top: $border-width solid $app-primary-background-color;
+  border-bottom: $border-width solid $app-primary-background-color;
+  border-left: $border-width solid transparent;
+  border-right: $border-width solid transparent;
+
+  -webkit-animation: rotation $duration infinite linear;
+  -moz-animation: rotation $duration infinite linear;
+  -ms-animation: rotation $duration infinite linear;
+  -o-animation: rotation $duration infinite linear;
+  animation: rotation $duration infinite linear;
+}
+
+@-webkit-keyframes rotation {
+   from {-webkit-transform: rotate(0deg);}
+   to {-webkit-transform: rotate(359deg);}
+}
+@-moz-keyframes rotation {
+   from {-moz-transform: rotate(0deg);}
+   to {-moz-transform: rotate(359deg);}
+}
+@-o-keyframes rotation {
+   from {-o-transform: rotate(0deg);}
+   to {-o-transform: rotate(359deg);}
+}
+@keyframes rotation {
+   from {transform: rotate(0deg);}
+   to {transform: rotate(359deg);}
+}
+
+.big-spinner {
+  @include double-spinner(150px, 10px, 1s);
+}
+
+.small-spinner {
+  @include double-spinner(20px, 2px, 1s);
+}

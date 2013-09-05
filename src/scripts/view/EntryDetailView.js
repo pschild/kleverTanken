@@ -13,8 +13,8 @@ define(
 			entryData_: null,
 
 			doBind: function() {
-				$('#edit-entry-button').on('click', this.getEditEntryButtonClickHandler_());
-				$('#delete-entry-button').on('click', this.getDeleteEntryButtonClickHandler_());
+				$('#edit-entry-button').fastClick(this.getEditEntryButtonClickHandler_());
+				$('#delete-entry-button').fastClick(this.getDeleteEntryButtonClickHandler_());
 			},
 
 			doUnbind: function() {
