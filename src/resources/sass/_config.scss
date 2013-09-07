@@ -29,13 +29,9 @@ $checkbox-background-color-check: #fcfff4;
 
 /* menu */
 $menu-background-color: $app-primary-background-color;
-$menu-hover-background-color: #47a3da;
-$menu-active-background-color: #106FA8;
-$menu-active-font-color: #47a3da;
-$menu-border-color: $app-primary-background-color;
+$menu-hover-background-color: lighten($menu-background-color, 8%);
+$menu-border-color: darken($menu-background-color, 5%);
 
 $menu-width: 250px;
 $menu-transition-time: 0.3s;
 $menu-transition-type: ease;
-
-// 47a3da, 106FA8

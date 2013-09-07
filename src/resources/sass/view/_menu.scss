@@ -1,11 +1,10 @@
 .menu-mask {
-  position: fixed;
-  top: 0px;
+  background-color: #000;
   width: 100%;
   height: 9999px;
-  background-color: #000;
-  opacity: 0;
+  position: fixed;
   z-index: -1;
+  opacity: 0;
   overflow: hidden;
 
   &.visible {
@@ -13,7 +12,7 @@
 	-moz-transition: opacity $menu-transition-time $menu-transition-type;
 	transition: opacity $menu-transition-time $menu-transition-type;
 
-	opacity: 0.75;
+	opacity: 0.3;
 	z-index: 1000;
   }
 }
@@ -32,10 +31,6 @@
 
 	  &:hover {
 		background: $menu-hover-background-color;
-	  }
-
-	  .active {
-		background-color: $menu-active-background-color;
 	  }
 	}
   }
@@ -70,13 +65,13 @@
   position: relative;
   /* use translate instead of left => better performance */
   //-webkit-transform: translate(0px, 0px);
-  left: 0px;
+  //left: 0px;
 }
 
 .menu-push-to-right {
   /* use translate instead of left => better performance */
   //-webkit-transform: translate($menu-width, 0px);
-  left: $menu-width;
+  //left: $menu-width;
 }
 
 .menu, .menu-push {

@@ -10,14 +10,15 @@ define(
 			$element: $('#menu-container'),
 
 			doBind: function() {
-				$('.menu-toggle').fastClick(this.getToggleMenuClickHandler_());
-				$('.menu-mask').fastClick(this.getMenuMaskClickHandler_());
-				$('#menu a').fastClick(this.getMenuItemClickHandler_());
+				$('.menu-toggle').on('click', this.getToggleMenuClickHandler_());
+				$('#menu a').on('click', this.getMenuItemClickHandler_());
+				$('#menu-mask').on('click', this.getMenuMasklickHandler_());
 			},
 
 			doUnbind: function() {
-				$('.menu-toggle').unbind();
-				$('#menu a').unbind();
+				$('.menu-toggle').off('click');
+				$('#menu a').off('click');
+				$('#menu-mask').off('click');
 			},
 
 			doRender: function() {
@@ -33,17 +34,17 @@ define(
 				}
 			},
 
-			getMenuMaskClickHandler_: function() {
-				var that = this;
-				return function() {
-					that.trigger('menumaskclick');
-				}
-			},
-
 			getMenuItemClickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('menuitemclick');
+				}
+			},
+
+			getMenuMasklickHandler_: function() {
+				var that = this;
+				return function() {
+					that.trigger('menumaskclick');
 				}
 			}
 		});

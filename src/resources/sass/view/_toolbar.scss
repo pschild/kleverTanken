@@ -4,6 +4,10 @@
 	background-color: $toolbar-background-color;
 	color: $toolbar-font-color;
 
+	.menu-toggle {
+	  display: inline-block;
+	}
+
 	.toolbar-headline {
 	  display: inline-block;
 	  font-size: $app-medium-font-size;
