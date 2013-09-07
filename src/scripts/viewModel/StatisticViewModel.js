@@ -1,12 +1,12 @@
 define(
 	[
 		'underscore',
-		'viewModel/ViewModel',
+		'viewModel/ViewModel', 'viewModel/GasstationChooserViewModel',
 		'Config', 'mixin/DatetimeMixin',
 		'collection/FuelsortCollection',
 		'view/StatisticView'
 	],
-	function(_, ViewModel, config, datetimeMixin, FuelsortCollection, StatisticView) {
+	function(_, ViewModel, GasstationChooserViewModel, config, datetimeMixin, FuelsortCollection, StatisticView) {
 		'use strict';
 
 		var StatisticViewModel = ViewModel.extend({
@@ -18,9 +18,19 @@ define(
 			},
 
 			doPopulate: function() {
+				this.showGasstationChooserView_();
+
 				this.mainView.populate({
 					fuelsortCollection: FuelsortCollection
 				});
+			},
+
+			showGasstationChooserView_: function() {
+				var gasstationChooserViewModel = new GasstationChooserViewModel({
+					element: $('#gasstation-chooser-view-container')
+				});
+				gasstationChooserViewModel.getMainView().show();
+				gasstationChooserViewModel.populate();
 			},
 
 			handleLoadStatisticsButtonClick_: function() {

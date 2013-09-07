@@ -1,13 +1,13 @@
 define(
 	[
 		'underscore',
-		'viewModel/ViewModel',
+		'viewModel/ViewModel', 'viewModel/GasstationChooserViewModel',
 		'mixin/DatetimeMixin',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
 		'view/EntryCreatorView',
 		'alertify'
 	],
-	function(_, ViewModel, datetimeMixin, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection, EntryCreatorView, alertify) {
+	function(_, ViewModel, GasstationChooserViewModel, datetimeMixin, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection, EntryCreatorView, alertify) {
 		'use strict';
 
 		var EntryCreatorViewModel = ViewModel.extend({
@@ -16,7 +16,6 @@ define(
 				this.mainView = new EntryCreatorView();
 
 				this.listenTo(this.mainView, 'saveentry', this.handleSaveEntryButtonClick_);
-				this.listenTo(this.mainView, 'gasstationchooserchange', this.handleGasstationChooserChange_);
 				this.listenTo(this.mainView, 'canceledit', this.handleCancelEditButtonClick_);
 				this.listenTo(this.mainView, 'fuelsortlabelclick', this.handleFuelsortLabelClick_);
 				this.listenTo(this.mainView, 'decrementprice', this.handleDecrementPriceButtonClick_);
@@ -24,6 +23,8 @@ define(
 			},
 
 			doPopulate: function(data) {
+				this.showGasstationChooserView_();
+
 				var entry = null;
 				if (data.entryId) {
 					entry = EntryCollection.findWhere('id', data.entryId);
@@ -35,6 +36,14 @@ define(
 					locationCollection: LocationCollection,
 					fuelsortCollection: FuelsortCollection
 				});
+			},
+
+			showGasstationChooserView_: function() {
+				var gasstationChooserViewModel = new GasstationChooserViewModel({
+					element: $('#gasstation-chooser-view-container')
+				});
+				gasstationChooserViewModel.getMainView().show();
+				gasstationChooserViewModel.populate();
 			},
 
 			validateForm_: function() {
@@ -115,16 +124,6 @@ define(
 
 			handleCancelEditButtonClick_: function() {
 				window.history.back();
-			},
-
-			handleGasstationChooserChange_: function(value) {
-				if (value > 0) {
-					$('#location-chooser').slideDown();
-					this.mainView.populateLocations();
-					return;
-				}
-
-				$('#location-chooser').slideUp();
 			},
 
 			handleFuelsortLabelClick_: function($checkbox) {

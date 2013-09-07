@@ -20,7 +20,6 @@ define(
 			fuelsortCollection_: null,
 
 			doBind: function() {
-				$('#gasstation-chooser').on('change', this.getGasstationChooserChangeHandler_());
 				$('#save-entry-button').fastClick(this.getSaveEntryButtonClickHandler_());
 				$('#cancel-edit-button').fastClick(this.getCancelEditButtonClickHandler_());
 
@@ -30,7 +29,6 @@ define(
 			},
 
 			doUnbind: function() {
-				$('#gasstation-chooser').off('change');
 				$('#save-entry-button').unbind();
 				$('#cancel-edit-button').unbind();
 
@@ -44,7 +42,6 @@ define(
 				this.locationCollection_ = data.locationCollection;
 				this.fuelsortCollection_ = data.fuelsortCollection;
 
-				this.populateGasstations_();
 				this.populateFuelsorts_();
 
 				$('#datetime').val(datetimeMixin.getCurrentDate() + ' ' + datetimeMixin.getCurrentTime());
@@ -53,16 +50,6 @@ define(
 					this.entry_ = data.entry;
 					this.populateEntry_();
 				}
-			},
-
-			populateLocations: function() {
-				$('#location-chooser').empty();
-
-				var locations = this.locationCollection_.findWhere('gasstationId', $('#gasstation-chooser').val(), true);
-				_.each(locations, function(location) {
-					var option = $('<option/>').val(location.id).text(location.street);
-					$('#location-chooser').append(option);
-				});
 			},
 
 			doRender: function() {
@@ -93,17 +80,6 @@ define(
 				});
 
 				$('.price').html(this.entry_.price);
-			},
-
-			populateGasstations_: function() {
-				$('#gasstation-chooser').append(
-					$('<option/>').val(-1).text('bitte wählen...')
-				);
-
-				_.each(this.gasstationCollection_.getData(), function(gasstation) {
-					var option = $('<option/>').val(gasstation.id).text(gasstation.name);
-					$('#gasstation-chooser').append(option);
-				});
 			},
 
 			populateFuelsorts_: function() {
@@ -137,13 +113,6 @@ define(
 					animate: 'pop',
 					mode: 'scroller'
 				});
-			},
-
-			getGasstationChooserChangeHandler_: function() {
-				var that = this;
-				return function() {
-					that.trigger('gasstationchooserchange', this.value);
-				};
 			},
 
 			getSaveEntryButtonClickHandler_: function() {

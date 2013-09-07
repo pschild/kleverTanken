@@ -77,6 +77,10 @@ define(
 
 			/* overwrite this in your specific View */
 			doUnbind: function() {
+			},
+
+			setElement: function($element) {
+				this.$element = $element;
 			}
 		});
 
