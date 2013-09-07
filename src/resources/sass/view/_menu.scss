@@ -1,4 +1,5 @@
 .menu-mask {
+  display: none;
   background-color: #000;
   width: 100%;
   height: 9999px;
@@ -8,6 +9,8 @@
   overflow: hidden;
 
   &.visible {
+	display: block;
+
 	-webkit-transition: opacity $menu-transition-time $menu-transition-type;
 	-moz-transition: opacity $menu-transition-time $menu-transition-type;
 	transition: opacity $menu-transition-time $menu-transition-type;
