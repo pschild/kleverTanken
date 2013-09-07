@@ -1,0 +1,17 @@
+<div class="col-xs-4">
+	<div>Minimum: <%- data.minPrice %> €</div>
+</div>
+<div class="col-xs-4">
+	<div>&empty; <%- data.avgPrice %> €</div>
+</div>
+<div class="col-xs-4">
+	<div>Maximum: <%- data.maxPrice %> €</div>
+</div>
+<div class="col-xs-12 day-statistic-container statistic-row">
+	<div>Günstigster Tag: <%- data.cheapestDay %> (&empty; <%- data.cheapestAvgPriceDay %> €)</div>
+	<div>Teuerster Tag: <%- data.mostExpensiveDay %> (&empty; <%- data.mostExpensiveAvgPriceDay %> €)</div>
+</div>
+<div class="col-xs-12 gasstation-statistic-container statistic-row">
+	<div>Günstigste Tankstelle: <%- data.cheapestGasstationId %> (&empty; <%- data.cheapestAvgPriceGasstation %> €)</div>
+	<div>Teuerste Tankstelle: <%- data.mostExpensiveGasstationId %> (&empty; <%- data.mostExpensiveAvgPriceGasstation %> €)</div>
+</div>

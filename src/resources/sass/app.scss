@@ -12,6 +12,9 @@
 @import "lib/alertify/alertify.core";
 @import "lib/alertify/alertify.bootstrap";
 
+/* fixes and workarounds */
+@import "lib/bootstrap-fix";
+
 /* mixins */
 @import "mixin/font-icons";
 @import "mixin/checkbox";

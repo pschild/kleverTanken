@@ -6,10 +6,4 @@
   #location-chooser {
 	display: none;
   }
-
-  /* Workaround, because Bootstrap 3 uses a specific cursor and a different background color for readonly-inputs. */
-  #datetime {
-	cursor: pointer;
-	background-color: #fff;
-  }
 }
