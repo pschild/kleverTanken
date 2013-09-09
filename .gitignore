@@ -1,4 +1,5 @@
 .sass-cache
 .idea
 build
+target
 src/resources/css
