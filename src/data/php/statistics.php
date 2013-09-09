@@ -9,13 +9,13 @@ $app = new \Slim\Slim();
 $app->get('/statistic', function() use ($app) {
 	$request = $app->request();
 	$fuelsortId = (int) $request->get('fuelsortId');
-	$gasstationId = (int) $request->get('gasstationId'); // -1 = all gasstations
+	$locationId = (int) $request->get('locationId'); // -1 = all locations
 	$fromDate = $request->get('fromDate');
 	$toDate = $request->get('toDate');
 
-	$priceStatsData = getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $gasstationId);
-	$priceStatsDataWithoutGasstation = getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId);
-	$cheapestAndMostExpensiveData = getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortId, $gasstationId);
+	$priceStatsData = getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $locationId);
+	$priceStatsDataWithoutLocation = getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId);
+	$cheapestAndMostExpensiveData = getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortId, $locationId);
 
 	$data = array(
 		'avgPrice' => round($priceStatsData['avgPrice'], 2),
@@ -28,22 +28,23 @@ $app->get('/statistic', function() use ($app) {
 		'mostExpensiveAvgPriceDay' => round($cheapestAndMostExpensiveData['mostExpensiveAvgPrice'], 2)
 	);
 
-	/* if a gasstation was selected */
-	if ($gasstationId > 0) {
+	/* if a location was selected */
+	if ($locationId > 0) {
 		$data['priceDevelopmentData'] = array(
-			'values' => getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $gasstationId),
-			'avgOverall' => round($priceStatsDataWithoutGasstation['avgPrice'], 2)
+			'values' => getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $locationId),
+			'avgOverall' => round($priceStatsDataWithoutLocation['avgPrice'], 2)
 		);
 	}
 
-	/* if no gasstation was selected for the statistic */
-	if ($gasstationId < 0) {
-		$cheapestAndMostExpensiveGasstationData = getCheapestAndMostExpensiveGasstationByCriteria($fromDate, $toDate, $fuelsortId);
-		$data['cheapestGasstationId'] = $cheapestAndMostExpensiveGasstationData['cheapestGasstationId'];
-		$data['cheapestAvgPriceGasstation'] = round($cheapestAndMostExpensiveGasstationData['cheapestAvgPrice'], 2);
-		$data['mostExpensiveGasstationId'] = $cheapestAndMostExpensiveGasstationData['mostExpensiveGasstationId'];
-		$data['mostExpensiveAvgPriceGasstation'] = round($cheapestAndMostExpensiveGasstationData['mostExpensiveAvgPrice'], 2);
-
+	/* if no location was selected for the statistic */
+	if ($locationId < 0) {
+		$cheapestAndMostExpensiveLocationData = getCheapestAndMostExpensiveLocationByCriteria($fromDate, $toDate, $fuelsortId);
+		$data['locationData'] = array(
+			'cheapestLocationId' => $cheapestAndMostExpensiveLocationData['cheapestLocationId'],
+			'cheapestAvgPriceLocation' => round($cheapestAndMostExpensiveLocationData['cheapestAvgPrice'], 2),
+			'mostExpensiveLocationId' => $cheapestAndMostExpensiveLocationData['mostExpensiveLocationId'],
+			'mostExpensiveAvgPriceLocation' => round($cheapestAndMostExpensiveLocationData['mostExpensiveAvgPrice'], 2)
+		);
 	}
 
 	$app->response()->header('Content-Type', 'application/json');
@@ -52,12 +53,12 @@ $app->get('/statistic', function() use ($app) {
 
 $app->run();
 
-function getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $gasstationId) {
+function getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $locationId) {
 	$sql = ""
 		. "SELECT `datetime`, `price` "
 		. "FROM `kt_entries` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
-		. "AND `gasstationId` = " . (int) $gasstationId . " "
+		. "AND `locationId` = " . (int) $locationId . " "
 		. "AND `datetime` BETWEEN '" . $fromDate . " 00:00' AND '" . $toDate . " 23:59' "
 		. "AND `deleted` = 0 "
 		. "ORDER BY `datetime` ASC "
@@ -72,7 +73,7 @@ function getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $gasstationId)
 	return $data;
 }
 
-function getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $gasstationId = 0) {
+function getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $locationId = 0) {
 	$sql = ""
 		. "SELECT AVG(`price`) AS `avgPrice`, MIN(`price`) AS `minPrice`, MAX(`price`) AS `maxPrice` "
 		. "FROM `kt_entries` "
@@ -81,8 +82,8 @@ function getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $gasstationId 
 		. "AND `deleted` = 0 "
 	;
 
-	if ((int) $gasstationId > 0) {
-		$sql .= "AND `gasstationId` = " . (int) $gasstationId . " ";
+	if ((int) $locationId > 0) {
+		$sql .= "AND `locationId` = " . (int) $locationId . " ";
 	}
 
 	$result = mysql_query($sql);
@@ -98,7 +99,7 @@ function getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $gasstationId 
 	return false;
 }
 
-function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortId, $gasstationId) {
+function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortId, $locationId) {
 	$sql = ""
 		. "SELECT `fuelsortId`, COUNT(`price`) AS `count`, AVG(`price`) AS `avgPrice`, DAYNAME(`datetime`) AS `dayName` "
 		. "FROM `kt_entries` "
@@ -107,9 +108,9 @@ function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortI
 		. "AND `deleted` = 0 "
 	;
 
-	if ((int) $gasstationId > 0) {
-		$sql .= "AND `gasstationId` = " . (int) $gasstationId . " ";
-		$sql .= "GROUP BY `fuelsortId`, `gasstationId`, `dayName` ";
+	if ((int) $locationId > 0) {
+		$sql .= "AND `locationId` = " . (int) $locationId . " ";
+		$sql .= "GROUP BY `fuelsortId`, `locationId`, `dayName` ";
 	} else {
 		$sql .= "GROUP BY `fuelsortId`, `dayName` ";
 	}
@@ -139,36 +140,36 @@ function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortI
 	);
 }
 
-function getCheapestAndMostExpensiveGasstationByCriteria($fromDate, $toDate, $fuelsortId) {
+function getCheapestAndMostExpensiveLocationByCriteria($fromDate, $toDate, $fuelsortId) {
 	$sql = ""
-		. "SELECT `gasstationId`, COUNT(`price`) AS `count`, AVG(`price`) AS `avgPrice` "
+		. "SELECT `locationId`, COUNT(`price`) AS `count`, AVG(`price`) AS `avgPrice` "
 		. "FROM `kt_entries` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
 		. "AND `datetime` BETWEEN '" . $fromDate . " 00:00:01' AND '" . $toDate . " 23:59:59' "
 		. "AND `deleted` = 0 "
-		. "GROUP BY `gasstationId` "
+		. "GROUP BY `locationId` "
 	;
 
 	$result = mysql_query($sql);
 	$data = array();
 	while ($row = mysql_fetch_assoc($result)) {
-		$data[$row['gasstationId']] = $row['avgPrice'];
+		$data[$row['locationId']] = $row['avgPrice'];
 	}
 
 	if (count($data) === 0) {
 		return array(
-			'cheapestGasstationId' => 'n/a',
-			'mostExpensiveGasstationId' => 'n/a',
+			'cheapestLocationId' => 'n/a',
+			'mostExpensiveLocationId' => 'n/a',
 			'cheapestAvgPrice' => 'n/a',
 			'mostExpensiveAvgPrice' => 'n/a'
 		);
 	}
 
-	$cheapestGasstationId = array_keys($data, min($data));
-	$mostExpensiveGasstationId = array_keys($data, max($data));
+	$cheapestLocationId = array_keys($data, min($data));
+	$mostExpensiveLocationId = array_keys($data, max($data));
 	return array(
-		'cheapestGasstationId' => (int) $cheapestGasstationId[0],
-		'mostExpensiveGasstationId' => (int) $mostExpensiveGasstationId[0],
+		'cheapestLocationId' => (int) $cheapestLocationId[0],
+		'mostExpensiveLocationId' => (int) $mostExpensiveLocationId[0],
 		'cheapestAvgPrice' => min($data),
 		'mostExpensiveAvgPrice' => max($data)
 	);
@@ -176,13 +177,13 @@ function getCheapestAndMostExpensiveGasstationByCriteria($fromDate, $toDate, $fu
 
 function mapEnglishToGerman($string) {
 	$lang = array(
-		'Monday' => 'Montag',
-		'Tuesday' => 'Dienstag',
-		'Wednesday' => 'Mittwoch',
-		'Thursday' => 'Donnerstag',
-		'Friday' => 'Freitag',
-		'Saturday' => 'Samstag',
-		'Sunday' => 'Sonntag'
+		'Monday' => 'Montags',
+		'Tuesday' => 'Dienstags',
+		'Wednesday' => 'Mittwochs',
+		'Thursday' => 'Donnerstags',
+		'Friday' => 'Freitags',
+		'Saturday' => 'Samstags',
+		'Sunday' => 'Sonntags'
 	);
 
 	return $lang[$string];

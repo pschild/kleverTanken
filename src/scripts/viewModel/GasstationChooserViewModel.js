@@ -25,13 +25,14 @@ define(
 			},
 
 			handleGasstationChooserChange_: function(value) {
-				if (value > 0) {
-					$('#location-chooser').slideDown();
-					this.mainView.populateLocations();
+				if (value < 0) {
+					$('#location-chooser').slideUp();
+					$('#location-chooser').empty();
 					return;
 				}
 
-				$('#location-chooser').slideUp();
+				$('#location-chooser').slideDown();
+				this.mainView.populateLocations();
 			}
 
 		});

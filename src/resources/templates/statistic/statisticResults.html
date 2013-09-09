@@ -1,17 +1,27 @@
-<div class="col-xs-4">
-	<div>Minimum: <%- data.minPrice %> €</div>
+<div class="row statistic-row">
+	<div class="col-xs-4">
+		<div class="icon-minimum price-label"><%- minPrice %> €</div>
+	</div>
+	<div class="col-xs-4">
+		<div class="price-label">&empty; <%- avgPrice %> €</div>
+	</div>
+	<div class="col-xs-4">
+		<div class="icon-maximum price-label"><%- maxPrice %> €</div>
+	</div>
 </div>
-<div class="col-xs-4">
-	<div>&empty; <%- data.avgPrice %> €</div>
+
+<div class="row">
+<div class="col-xs-12 col-sm-6 day-statistic-container statistic-row">
+	<div class="icon-day"><b>Wann kann ich am besten tanken?</b></div>
+	<div class="icon-minimum"><%- cheapestDay %> (&empty; <%- cheapestAvgPriceDay %> €)</div>
+	<div class="icon-maximum"><%- mostExpensiveDay %> (&empty; <%- mostExpensiveAvgPriceDay %> €)</div>
 </div>
-<div class="col-xs-4">
-	<div>Maximum: <%- data.maxPrice %> €</div>
+
+<% if (typeof locationData !== 'undefined') { %>
+<div class="col-xs-12 col-sm-6 location-statistic-container statistic-row">
+	<div class="icon-euro"><b>Wo kann ich am besten tanken?</b></div>
+	<div><span class="icon-minimum"></span><%- locationData.cheapestLocation.gasstation.name %>, <%- locationData.cheapestLocation.location.street %>, <%- locationData.cheapestLocation.location.city %> (&empty; <%- locationData.cheapestAvgPriceLocation %> €)</div>
+	<div><span class="icon-maximum"></span><%- locationData.mostExpensiveLocation.gasstation.name %>, <%- locationData.mostExpensiveLocation.location.street %>, <%- locationData.mostExpensiveLocation.location.city %> (&empty; <%- locationData.mostExpensiveAvgPriceLocation %> €)</div>
 </div>
-<div class="col-xs-12 day-statistic-container statistic-row">
-	<div>Günstigster Tag: <%- data.cheapestDay %> (&empty; <%- data.cheapestAvgPriceDay %> €)</div>
-	<div>Teuerster Tag: <%- data.mostExpensiveDay %> (&empty; <%- data.mostExpensiveAvgPriceDay %> €)</div>
-</div>
-<div class="col-xs-12 gasstation-statistic-container statistic-row">
-	<div>Günstigste Tankstelle: <%- data.cheapestGasstationId %> (&empty; <%- data.cheapestAvgPriceGasstation %> €)</div>
-	<div>Teuerste Tankstelle: <%- data.mostExpensiveGasstationId %> (&empty; <%- data.mostExpensiveAvgPriceGasstation %> €)</div>
+<% } %>
 </div>

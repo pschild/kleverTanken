@@ -13,6 +13,7 @@ require.config({
 		'jquery-fast-click': 'lib/jquery-fast-click',
 		nprogress: 'lib/nprogress',
 		alertify: 'lib/alertify',
+		chartJs: 'lib/Chart',
 
 		templates: '../resources/templates'
 	},

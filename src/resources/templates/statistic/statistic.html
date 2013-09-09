@@ -1,26 +1,32 @@
 <div id="statistics">
 
-	<div>
+	<div class="statistic-row">
 		<label for="fuelsort-chooser">Spritsorte</label>
 		<select id="fuelsort-chooser" class="form-control"></select>
 	</div>
 
-	<div id="gasstation-chooser-view-container" class="form-row"></div>
+	<div id="gasstation-chooser-view-container" class="statistic-row"></div>
 
-	<div class="col-xs-6">
-		<label for="from-date">von</label>
-		<input type="text" id="from-date" class="form-control" />
-	</div>
-	<div class="col-xs-6">
-		<label for="to-date">bis</label>
-		<input type="text" id="to-date" class="form-control" />
+	<div class="row statistic-row">
+		<div class="col-xs-6">
+			<label for="from-date">von</label>
+			<input type="text" id="from-date" class="form-control" />
+		</div>
+		<div class="col-xs-6">
+			<label for="to-date">bis</label>
+			<input type="text" id="to-date" class="form-control" />
+		</div>
 	</div>
 
-	<button id="load-statistics-button" class="btn btn-large btn-primary icon-statistics">Statistiken laden</button>
+	<div class="row statistic-row">
+		<div class="col-xs-12">
+			<button id="load-statistics-button" class="btn btn-large btn-primary icon-load-statistics">Statistiken laden</button>
+		</div>
+	</div>
 
 	<div class="statistic-results"></div>
 
-	<span class="statistic-chart">
+	<span class="statistic-chart statistic-row">
 		<canvas id="chart" height="300" width="2000"></canvas>
 	</span>
 </div>

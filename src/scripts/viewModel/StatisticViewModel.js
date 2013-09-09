@@ -3,10 +3,11 @@ define(
 		'underscore',
 		'viewModel/ViewModel', 'viewModel/GasstationChooserViewModel',
 		'Config', 'mixin/DatetimeMixin',
-		'collection/FuelsortCollection',
-		'view/StatisticView'
+		'collection/FuelsortCollection', 'collection/GasstationCollection', 'collection/LocationCollection',
+		'view/StatisticView',
+		'alertify'
 	],
-	function(_, ViewModel, GasstationChooserViewModel, config, datetimeMixin, FuelsortCollection, StatisticView) {
+	function(_, ViewModel, GasstationChooserViewModel, config, datetimeMixin, FuelsortCollection, GasstationCollection, LocationCollection, StatisticView, alertify) {
 		'use strict';
 
 		var StatisticViewModel = ViewModel.extend({
@@ -35,7 +36,7 @@ define(
 
 			handleLoadStatisticsButtonClick_: function() {
 				var fuelsortId = $('#fuelsort-chooser').val();
-				var gasstationId = $('#location-chooser').val() || -1; // TODO
+				var locationId = $('#location-chooser').val() || -1;
 
 				var fromDate = datetimeMixin.getDateTimeForServer(
 					datetimeMixin.formatGermanDatetimeToJsDate($('#from-date').val(), false),
@@ -50,18 +51,37 @@ define(
 				$.ajax({
 					url: config.baseUrl + 'statistics.php/statistic',
 					data: {
-						'fuelsortId': parseInt(fuelsortId),
-						'gasstationId': parseInt(gasstationId),
-						'fromDate': fromDate,
-						'toDate': toDate
+						fuelsortId: parseInt(fuelsortId),
+						locationId: parseInt(locationId),
+						fromDate: fromDate,
+						toDate: toDate
 					},
-					success: function(r) {
-						console.log('success', r);
-					},
+					type: 'GET',
+					dataType: 'json',
+					success:_.bind(this.loadStatisticResultsSuccess_, this),
 					error: function() {
-						alert('Ups...beim Laden der Statistiken ist wohl etwas schief gelaufen :-(');
+						alertify.error('Ups...beim Laden der Statistiken ist wohl etwas schief gelaufen :-(');
 					}
 				});
+			},
+
+			loadStatisticResultsSuccess_: function(data) {
+				if (data.locationData) {
+					var cheapestLocation = LocationCollection.findWhere('id', data.locationData.cheapestLocationId);
+					data.locationData.cheapestLocation = {
+						gasstation: GasstationCollection.findWhere('id', cheapestLocation.gasstationId),
+						location: cheapestLocation
+					};
+
+					var mostExpensiveLocation = LocationCollection.findWhere('id', data.locationData.mostExpensiveLocationId);
+					data.locationData.mostExpensiveLocation = {
+						gasstation: GasstationCollection.findWhere('id', mostExpensiveLocation.gasstationId),
+						location: mostExpensiveLocation
+					};
+				}
+
+				this.mainView.renderStatisticResults(data);
+				this.mainView.renderChart(data.priceDevelopmentData);
 			}
 
 		});

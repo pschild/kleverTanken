@@ -2,9 +2,10 @@ define(
 	[
 		'jquery', 'underscore', 'view/View',
 		'mixin/DatetimeMixin',
-		'text!templates/statistic/statistic.html'
+		'chartJs',
+		'text!templates/statistic/statistic.html', 'text!templates/statistic/statisticResults.html'
 	],
-	function($, _, View, datetimeMixin, statisticTemplate) {
+	function($, _, View, datetimeMixin, chartJs, statisticTemplate, statisticResultsTemplate) {
 		'use strict';
 
 		var StatisticView = View.extend({
@@ -23,11 +24,87 @@ define(
 				this.populateFuelsorts_();
 			},
 
-			populateFuelsorts_: function() {
-				$('#fuelsort-chooser').append(
-					$('<option/>').val(-1).text('bitte wählen...')
+			renderStatisticResults: function(data) {
+				$('.statistic-results').html(
+					_.template(
+						statisticResultsTemplate,
+						data
+					)
 				);
 
+				if (!data.locationData) {
+					$('.location-statistic-container').hide();
+				} else {
+					$('.location-statistic-container').show();
+				}
+			},
+
+			renderChart: function(data) {
+				if (!data || data.values.length < 2) {
+					$('.statistic-chart').hide();
+					return;
+				}
+
+				var labels = [];
+				var prices = [];
+				var avgPrices = [];
+				_.each(data.values, _.bind(function(entry) {
+					labels.push(datetimeMixin.formatServerDateToGermanDate(entry.datetime));
+					prices.push(parseFloat(entry.price).toFixed(2));
+					avgPrices.push(parseFloat(data.avgOverall).toFixed(2));
+				}, this));
+
+				var chartWidth = 400;
+				if (labels.length > 10) {
+					chartWidth = 400 + labels.length * 10;
+					for (var i = 0; i < labels.length; i++) {
+						if (
+							i > 0
+								&& i !== labels.length - 1
+								&& i !== Math.floor(labels.length / 2)
+							) {
+							labels[i] = '';
+						}
+					}
+				}
+
+				var lineChartData = {
+					labels: labels,
+					datasets: [
+						{
+							fillColor: 'rgba(37, 142, 205, 0.5)',
+							strokeColor: 'rgba(37, 142, 205, 0.9)',
+							data: prices
+						},
+						{
+							fillColor: 'rgba(0, 0, 0, 0.2)',
+							strokeColor: 'rgba(0, 0, 0, 0.0)',
+							data: avgPrices
+						}
+					]
+				};
+
+				var minPrice = parseFloat(_.min(prices));
+				var maxPrice = parseFloat(_.max(prices));
+				var diff = (maxPrice + 0.05) - (minPrice - 0.05);
+				var steps = (diff / 0.05);
+
+				var options = {
+					scaleOverride: true,
+					scaleSteps: steps,
+					scaleStepWidth: 0.05,
+					scaleStartValue: minPrice - 0.05,
+					pointDot: false,
+					animation: false
+				};
+
+				var chart = $('<canvas/>').attr('id', 'chart').attr('width', chartWidth).attr('height', 300);
+				$('.statistic-chart').empty().append(chart);
+				new Chart(document.getElementById('chart').getContext('2d')).Line(lineChartData, options);
+				$('.statistic-chart').css('display', 'block');
+			},
+
+			populateFuelsorts_: function() {
 				_.each(this.fuelsortCollection_.getData(), function(fuelsort) {
 					var option = $('<option/>').val(fuelsort.id).text(fuelsort.name);
 					$('#fuelsort-chooser').append(option);
