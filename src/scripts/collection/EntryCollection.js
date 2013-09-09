@@ -66,6 +66,7 @@ define(
 					console.error('No entryId given.');
 					return;
 				}
+				console.warn('TODO: entryData[0] nix gut...');
 				var newModel = options.data.entryData[0] || {};
 
 				var that = this;
@@ -76,7 +77,13 @@ define(
 					dataType: 'json',
 					contentType: 'application/json',
 					success: function(response) {
-						that.updateWhere(entryId, newModel);
+						if (!that.findWhere('id', entryId)) {
+							console.warn('TODO: that.addData([newModel]); nix gut...');
+							that.addData([newModel]);
+						} else {
+							that.updateWhere(entryId, newModel);
+						}
+
 						successCallback.call(scope, response);
 					},
 					error: function(response) {

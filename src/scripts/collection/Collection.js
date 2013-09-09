@@ -5,6 +5,7 @@ define(
 		
 		function Collection() {
 			this.data_ = [];
+			this.cachedModel_ = null;
 		}
 
 		_.extend(Collection.prototype, {
@@ -36,6 +37,14 @@ define(
 
 			getData: function() {
 				return this.data_;
+			},
+
+			setCachedModel: function(model) {
+				this.cachedModel_ = model;
+			},
+
+			getCachedModel: function() {
+				return this.cachedModel_;
 			},
 
 			updateWhere: function(searchKey, data) {

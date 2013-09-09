@@ -48,14 +48,14 @@ define(
 			getEditEntryButtonClickHandler_: function() {
 				var that = this;
 				return function() {
-					that.trigger('editentry', that.entryData_.entry.id);
+					that.trigger('editentry');
 				}
 			},
 
 			getDeleteEntryButtonClickHandler_: function() {
 				var that = this;
 				return function() {
-					that.trigger('deleteentry', that.entryData_.entry.id);
+					that.trigger('deleteentry');
 				}
 			}
 		});

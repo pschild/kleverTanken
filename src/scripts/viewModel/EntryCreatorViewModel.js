@@ -64,6 +64,7 @@ define(
 						datetime: this.getDateAndTimeFromPicker_()
 					});
 				}, this);
+				console.warn('TODO: wenn nur ein Model gespeichert werden soll (z.B. bei Update), dann nur das zurückgeben, nicht das Array');
 
 				return entries;
 			},

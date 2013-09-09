@@ -30,6 +30,10 @@ define(
 				);
 			},
 
+			resetEntryList: function() {
+				$('.entry-list-container').empty();
+			},
+
 			appendEntries_: function(entries) {
 				var that = this;
 				_.each(entries, function(entryData) {

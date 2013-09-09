@@ -81,6 +81,10 @@ define(
 
 			setElement: function($element) {
 				this.$element = $element;
+			},
+
+			getElement: function() {
+				return this.$element;
 			}
 		});
 

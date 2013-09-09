@@ -2,11 +2,12 @@ define(
 	[
 		'underscore',
 		'viewModel/ViewModel',
+		'mixin/EventBus',
 		'mixin/DatetimeMixin',
 		'collection/EntryCollection', 'collection/FuelsortCollection', 'collection/GasstationCollection', 'collection/LocationCollection',
 		'view/EntryListView'
 	],
-	function(_, ViewModel, datetimeMixin, EntryCollection, FuelsortCollection, GasstationCollection, LocationCollection, EntryListView) {
+	function(_, ViewModel, eventBus, datetimeMixin, EntryCollection, FuelsortCollection, GasstationCollection, LocationCollection, EntryListView) {
 		'use strict';
 
 		var EntryListViewModel = ViewModel.extend({
@@ -17,6 +18,12 @@ define(
 				this.mainView = new EntryListView();
 
 				this.listenTo(this.mainView, 'loadmore', this.handleLoadMoreButtonClick_);
+				eventBus.on('undodelete', this.handleUndoEntryDelete_, this);
+			},
+
+			handleUndoEntryDelete_: function() {
+				this.mainView.resetEntryList();
+				this.populate();
 			},
 
 			doPopulate: function() {
