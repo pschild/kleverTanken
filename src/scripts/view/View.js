@@ -39,8 +39,8 @@ define(
 				this.$element.fadeOut();
 				this.render();
 				this.$element.fadeIn();
-				*/
 				console.info('TODO: hier könnte man noch animationen einbauen (s.o.)');
+				*/
 				this.render();
 				this.bind();
 			},

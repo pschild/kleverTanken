@@ -79,7 +79,7 @@ define(
 					}
 				});
 
-				$('.price').html(this.entry_.price);
+				$('.price').html(this.entry_.price.toFixed(2));
 			},
 
 			populateFuelsorts_: function() {
