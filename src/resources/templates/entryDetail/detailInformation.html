@@ -3,11 +3,11 @@
 		<img src="resources/images/<%- entryData.gasstation.name.toLowerCase() %>.png" />
 	</div>
 	<div><%- entryData.location.street %>, <%- entryData.location.city %></div>
-	<a href="http://maps.google.de/maps?q=<%- entryData.location.latitude %>,<%- entryData.location.longitude %>" target="_blank">In Google Maps ansehen</a>
+	<span class="icon-map"></span><a href="http://maps.google.de/maps?q=<%- entryData.location.latitude %>,<%- entryData.location.longitude %>" target="_blank">In Google Maps ansehen</a>
 </div>
 
 <div class="detail-row">
-	<%- entryData.fuelsort.name %> für <span class="fuelsort-price"><%- entryData.entry.price %> €</span>
+	<%- entryData.fuelsort.name %> für <span class="fuelsort-price"><%- entryData.entry.price.toFixed(2) %> €</span>
 </div>
 
 <div class="detail-row">

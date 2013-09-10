@@ -25,7 +25,7 @@ define(
 			},
 
 			renderStatisticResults: function(data) {
-				$('.statistic-results').html(
+				$('.statistic-results').hide().html(
 					_.template(
 						statisticResultsTemplate,
 						data
@@ -37,6 +37,8 @@ define(
 				} else {
 					$('.location-statistic-container').show();
 				}
+
+				$('.statistic-results').fadeIn();
 			},
 
 			renderChart: function(data) {
