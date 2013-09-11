@@ -13,7 +13,7 @@ define(
 			entries_: [],
 
 			doBind: function() {
-				$('#load-more-button').fastClick(this.getLoadMoreButtonClickHandler_());
+				$('#load-more-button').click(this.getLoadMoreButtonClickHandler_());
 			},
 
 			doUnbind: function() {
@@ -56,8 +56,7 @@ define(
 
 			getLoadMoreButtonClickHandler_: function() {
 				var that = this;
-				return function(event) {
-					event.preventDefault();
+				return function() {
 					that.trigger('loadmore');
 				}
 			}

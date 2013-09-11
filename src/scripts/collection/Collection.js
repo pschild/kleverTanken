@@ -1,6 +1,6 @@
 define(
-	['jquery', 'underscore', 'mixin/ExtendMixin'],
-	function($, _, ExtendMixin) {
+	['jquery', 'underscore', 'mixin/ExtendMixin', 'alertify'],
+	function($, _, ExtendMixin, alertify) {
 		'use strict';
 		
 		function Collection() {
@@ -81,6 +81,10 @@ define(
 					this.data_,
 					sortFn
 				);
+			},
+
+			showDefaultErrorMessage_: function(response) {
+				alertify.error('<b>[' + response.status + ' ' + response.statusText + ']</b> Uuups...da ist was schief gelaufen. Bitte versuche es erneut.');
 			}
 		});
 

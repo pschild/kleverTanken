@@ -25,7 +25,7 @@ define(
 						successCallback.call(scope, response);
 					},
 					error: function(response) {
-						console.error('Collection could not be loaded: ', response);
+						that.showDefaultErrorMessage_(response);
 						errorCallback.call(scope, response);
 					}
 				});
@@ -50,7 +50,7 @@ define(
 						successCallback.call(scope, response);
 					},
 					error: function(response) {
-						console.error('Data could not be saved: ', response);
+						that.showDefaultErrorMessage_(response);
 						errorCallback.call(scope, response);
 					}
 				});
@@ -87,7 +87,7 @@ define(
 						successCallback.call(scope, response);
 					},
 					error: function(response) {
-						console.error('Data could not be updated: ', response);
+						that.showDefaultErrorMessage_(response);
 						errorCallback.call(scope, response);
 					}
 				});
@@ -113,7 +113,7 @@ define(
 						successCallback.call(scope, response);
 					},
 					error: function(response) {
-						console.error('Data could not be deleted: ', response);
+						that.showDefaultErrorMessage_(response);
 						errorCallback.call(scope, response);
 					}
 				});

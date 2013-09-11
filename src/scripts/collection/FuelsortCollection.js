@@ -20,7 +20,7 @@ define(
 						successCallback.call(scope, response);
 					},
 					error: function(response) {
-						console.error('Collection could not be loaded: ', response);
+						that.showDefaultErrorMessage_(response);
 						errorCallback.call(scope, response);
 					}
 				});

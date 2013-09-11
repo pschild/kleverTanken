@@ -20,12 +20,12 @@ define(
 			fuelsortCollection_: null,
 
 			doBind: function() {
-				$('#save-entry-button').fastClick(this.getSaveEntryButtonClickHandler_());
-				$('#cancel-edit-button').fastClick(this.getCancelEditButtonClickHandler_());
+				$('#save-entry-button').click(this.getSaveEntryButtonClickHandler_());
+				$('#cancel-edit-button').click(this.getCancelEditButtonClickHandler_());
 
 				$('.decrement-price-button').fastClick(this.getDecrementPriceButtonClickHandler_());
 				$('.increment-price-button').fastClick(this.getIncrementPriceButtonClickHandler_());
-				$('.fuelsort-label').fastClick(this.getFuelsortLabelClickHandler_());
+				$('.fuelsort-label').click(this.getFuelsortLabelClickHandler_());
 			},
 
 			doUnbind: function() {

@@ -25,6 +25,12 @@ define(
 				this.entryId_ = data.entryId;
 
 				var entry = EntryCollection.findWhere('id', data.entryId);
+				if (!entry) {
+					alertify.error('Ein Eintrag zu der ID ' + data.entryId + ' konnte leider nicht gefunden werden.');
+					window.location.href = '#entryList';
+					return;
+				}
+
 				var location = LocationCollection.findWhere('id', entry.locationId);
 				this.mainView.populate({
 					entry: entry,

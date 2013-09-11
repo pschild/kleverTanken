@@ -12,7 +12,7 @@ define(
 			$element: $('#app-container'),
 
 			doBind: function() {
-				$('#load-statistics-button').fastClick(this.getLoadStatisticsButtonClickHandler_());
+				$('#load-statistics-button').click(this.getLoadStatisticsButtonClickHandler_());
 			},
 
 			doUnbind: function() {
