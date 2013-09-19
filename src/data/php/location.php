@@ -11,7 +11,7 @@ $app->get('/location', function() use ($app) {
 	$id = $request->get('id');
 
 	$sql = ""
-		. "SELECT * FROM `kt_locations` "
+		. "SELECT * FROM `" . LOCATION_TABLE . "` "
 	;
 
 	if($id !== null && $id !== '') {
@@ -62,7 +62,7 @@ $app->run();
  */
 function getEntriesCountByLocationId($locationId) {
 	$sql = ""
-		. "SELECT COUNT(*) AS `entriesCount` FROM `kt_entries` "
+		. "SELECT COUNT(*) AS `entriesCount` FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `locationId` = " . (int) $locationId . " "
 		. "AND `deleted` = 0 "
 	;

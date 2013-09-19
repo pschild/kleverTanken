@@ -13,7 +13,7 @@ $app->get('/entry', function() use ($app) {
 	$entriesPerPage = (int) $request->get('entriesPerPage');
 
 	$sql = ""
-		. "SELECT * FROM `kt_entries` "
+		. "SELECT * FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `deleted` <> 1 "
 	;
 
@@ -38,7 +38,8 @@ $app->get('/entry', function() use ($app) {
 			'timestamp' => (int) $row['timestamp'],
 			'datetime' => $row['datetime'],
 			'confirmed' => (int) $row['confirmed'],
-			'deleted' => (int) $row['deleted']
+			'deleted' => (int) $row['deleted'],
+			'mts' => (int) $row['mts']
 		);
 	}
 
@@ -57,10 +58,10 @@ $app->post('/entry', function() use ($app) {
 		$datetime = $entry['datetime'];
 
 		$sql = ""
-			. "INSERT INTO `kt_entries` "
-			. "(`locationId`, `fuelsortId`, `price`, `datetime`, `confirmed`, `deleted`) "
+			. "INSERT INTO `" . ENTRY_TABLE . "` "
+			. "(`locationId`, `fuelsortId`, `price`, `datetime`, `confirmed`, `deleted`, `mts`) "
 			. "VALUES "
-			. "(" . $locationId . ", " . $fuelsortId . ", " . $price . ", '" . $datetime . "', 0, 0)"
+			. "(" . $locationId . ", " . $fuelsortId . ", " . $price . ", '" . $datetime . "', 0, 0, 0)"
 		;
 
 		mysql_query($sql);
@@ -71,7 +72,8 @@ $app->post('/entry', function() use ($app) {
 			'price' => $price,
 			'datetime' => $datetime,
 			'confirmed' => 0,
-			'deleted' => 0
+			'deleted' => 0,
+			'mts' => 0
 		);
 	}
 
@@ -90,13 +92,14 @@ $app->put('/entry/:id', function($id) use ($app) {
 	$deleted = (int) $entryData['deleted'];
 
 	$sql = ""
-		. "UPDATE `kt_entries` "
+		. "UPDATE `" . ENTRY_TABLE . "` "
 		. "SET `locationId` = " . $locationId . ", "
 		. "`fuelsortId` = " . $fuelsortId . ", "
 		. "`price` = " . $price . ", "
 		. "`datetime` = '" . $datetime . "', "
 		. "`confirmed` = " . $confirmed . ", "
-		. "`deleted` = " . $deleted . " "
+		. "`deleted` = " . $deleted . ", "
+		. "`mts` = 0 "
 		. "WHERE `id` = " . (int) $id . " "
 	;
 
@@ -108,7 +111,7 @@ $app->put('/entry/:id', function($id) use ($app) {
 
 $app->delete('/entry/:id', function($id) use ($app) {
 	$sql = ""
-		. "UPDATE `kt_entries` "
+		. "UPDATE `" . ENTRY_TABLE . "` "
 		. "SET `deleted` = 1 "
 		. "WHERE `id` = " . (int) $id . " "
 	;

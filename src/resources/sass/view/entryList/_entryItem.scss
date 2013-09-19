@@ -13,6 +13,13 @@
 	  border-color: $app-primary-background-color;
 	}
 
+	.mts-label {
+	  display: none;
+	  position: absolute;
+	  top: 0px;
+	  right: 18px;
+	}
+
 	.gasstation-image-container {
 	  position: absolute;
 	  width: 40px;

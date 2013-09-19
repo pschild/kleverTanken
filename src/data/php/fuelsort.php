@@ -11,7 +11,7 @@ $app->get('/fuelsort', function() use ($app) {
 	$id = $request->get('id');
 
 	$sql = ""
-		. "SELECT * FROM `kt_fuelsorts` "
+		. "SELECT * FROM `" . FUELSORT_TABLE . "` "
 	;
 
 	if ($id !== null && $id !== '') {
@@ -60,7 +60,7 @@ $app->run();
  */
 function getAveragePriceByFuelsortId($fuelsortId, $timeLimitInDays = null) {
 	$sql = ""
-		. "SELECT AVG(`price`) AS `avgPrice` FROM `kt_entries` "
+		. "SELECT AVG(`price`) AS `avgPrice` FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
 		. "AND `deleted` = 0 "
 	;
@@ -68,9 +68,9 @@ function getAveragePriceByFuelsortId($fuelsortId, $timeLimitInDays = null) {
 	if ($timeLimitInDays !== null) {
 		$sql .= ""
 			  . "AND `datetime` BETWEEN "
-			  . "(SELECT ADDDATE(MAX(`datetime`), INTERVAL -" . (int) $timeLimitInDays . " DAY) FROM `kt_entries` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
+			  . "(SELECT ADDDATE(MAX(`datetime`), INTERVAL -" . (int) $timeLimitInDays . " DAY) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
 			  . "AND "
-			  . "(SELECT MAX(`datetime`) FROM `kt_entries` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
+			  . "(SELECT MAX(`datetime`) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
 		;
 	}
 

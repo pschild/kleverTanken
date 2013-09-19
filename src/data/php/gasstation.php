@@ -11,7 +11,7 @@ $app->get('/gasstation', function() use ($app) {
 	$id = $request->get('id');
 
 	$sql = ""
-		. "SELECT * FROM `kt_gasstations` "
+		. "SELECT * FROM `" . GASSTATION_TABLE . "` "
 	;
 
 	if($id !== null && $id !== '') {

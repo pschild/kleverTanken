@@ -56,7 +56,7 @@ $app->run();
 function getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $locationId) {
 	$sql = ""
 		. "SELECT `datetime`, `price` "
-		. "FROM `kt_entries` "
+		. "FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
 		. "AND `locationId` = " . (int) $locationId . " "
 		. "AND `datetime` BETWEEN '" . $fromDate . " 00:00' AND '" . $toDate . " 23:59' "
@@ -76,7 +76,7 @@ function getPriceDevelopmentData($fromDate, $toDate, $fuelsortId, $locationId) {
 function getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $locationId = 0) {
 	$sql = ""
 		. "SELECT AVG(`price`) AS `avgPrice`, MIN(`price`) AS `minPrice`, MAX(`price`) AS `maxPrice` "
-		. "FROM `kt_entries` "
+		. "FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
 		. "AND `datetime` BETWEEN '" . $fromDate . " 00:00' AND '" . $toDate . " 23:59' "
 		. "AND `deleted` = 0 "
@@ -102,7 +102,7 @@ function getPriceStatsByCriteria($fromDate, $toDate, $fuelsortId, $locationId = 
 function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortId, $locationId) {
 	$sql = ""
 		. "SELECT `fuelsortId`, COUNT(`price`) AS `count`, AVG(`price`) AS `avgPrice`, DAYNAME(`datetime`) AS `dayName` "
-		. "FROM `kt_entries` "
+		. "FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
 		. "AND `datetime` BETWEEN '" . $fromDate . " 00:00:01' AND '" . $toDate . " 23:59:59' "
 		. "AND `deleted` = 0 "
@@ -143,7 +143,7 @@ function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortI
 function getCheapestAndMostExpensiveLocationByCriteria($fromDate, $toDate, $fuelsortId) {
 	$sql = ""
 		. "SELECT `locationId`, COUNT(`price`) AS `count`, AVG(`price`) AS `avgPrice` "
-		. "FROM `kt_entries` "
+		. "FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
 		. "AND `datetime` BETWEEN '" . $fromDate . " 00:00:01' AND '" . $toDate . " 23:59:59' "
 		. "AND `deleted` = 0 "
