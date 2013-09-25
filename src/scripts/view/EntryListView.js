@@ -52,8 +52,8 @@ define(
 						)
 					);
 
-					if (entryData.entry.mts && entryData.entry.mts == 1) {
-						$('.mts-label').show();
+					if (entryData.entry.mts == 0) {
+						$('.mts-label', '#entry-' + entryData.entry.id).hide();
 					}
 				});
 			},
