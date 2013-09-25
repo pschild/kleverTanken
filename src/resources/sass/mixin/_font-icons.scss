@@ -81,6 +81,6 @@
 }
 
 .icon-mts::before {
-  @include icon('´', $app-medium-font-size);
-  color: darken($app-secondary-background-color, 20%);
+  @include icon('a', $app-small-font-size);
+  color: darken($app-secondary-background-color, 50%);
 }
