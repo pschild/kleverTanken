@@ -153,6 +153,13 @@ define(
 				} else {
 					return dayOfEntry + '.' + monthOfEntry + '.' + yearOfEntry + ', ' + hoursOfEntry + ':' + minutesOfEntry + ' Uhr';
 				}
+			},
+
+			getMondayOfCurrentWeek: function() {
+				var today = new Date();
+				var day = today.getDay();
+				var diff = today.getDate() - day + (day == 0 ? -6 : 1);
+				return new Date(today.setDate(diff));
 			}
 		};
 	}

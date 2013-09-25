@@ -13,10 +13,12 @@ define(
 
 			doBind: function() {
 				$('#load-statistics-button').click(this.getLoadStatisticsButtonClickHandler_());
+				$('.shortcut-button').click(this.getShortcutButtonClickHandler_());
 			},
 
 			doUnbind: function() {
 				$('#load-statistics-button').unbind();
+				$('#shortcut-today-button').unbind();
 			},
 
 			doPopulate: function(data) {
@@ -166,6 +168,14 @@ define(
 				var that = this;
 				return function() {
 					that.trigger('loadstatistics');
+				}
+			},
+
+			getShortcutButtonClickHandler_: function() {
+				var that = this;
+				return function(event) {
+					var shortcutValue = event.currentTarget.value;
+					that.trigger('shortcut', shortcutValue);
 				}
 			}
 		});

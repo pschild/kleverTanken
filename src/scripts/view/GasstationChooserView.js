@@ -8,6 +8,8 @@ define(
 
 		var GasstationChooserView = View.extend({
 
+			gasstationCollection_: null,
+
 			locationCollection_: null,
 
 			doBind: function() {
@@ -35,6 +37,10 @@ define(
 				$('#gasstation-chooser').append(
 					$('<option/>').val(-1).text('bitte wählen...')
 				);
+
+				this.gasstationCollection_.sortBy(function(value) {
+					return value.name;
+				});
 
 				_.each(this.gasstationCollection_.getData(), function(gasstation) {
 					var option = $('<option/>').val(gasstation.id).text(gasstation.name);

@@ -16,6 +16,7 @@ define(
 				this.mainView = new StatisticView();
 
 				this.listenTo(this.mainView, 'loadstatistics', this.handleLoadStatisticsButtonClick_);
+				this.listenTo(this.mainView, 'shortcut', this.handleShortcutButtonClick_);
 			},
 
 			doPopulate: function() {
@@ -32,6 +33,32 @@ define(
 				});
 				gasstationChooserViewModel.getMainView().show();
 				gasstationChooserViewModel.populate();
+			},
+
+			handleShortcutButtonClick_: function(shortcutValue) {
+				var fromDate;
+				var today = new Date();
+
+				switch (shortcutValue) {
+					case 'today':
+						fromDate = new Date();
+						break;
+					case 'week':
+						fromDate = datetimeMixin.getMondayOfCurrentWeek();
+						break;
+					case 'month':
+						fromDate = new Date(today.getFullYear(), today.getMonth(), 1);
+						break;
+					case 'year':
+						fromDate = new Date(today.getFullYear(), 0, 1);
+						break;
+					default:
+						console.error('No Shortcut-Value was given.');
+						break;
+				}
+
+				$('#from-date').val(datetimeMixin.getDateAsString(fromDate));
+				$('#to-date').val(datetimeMixin.getDateAsString(today));
 			},
 
 			handleLoadStatisticsButtonClick_: function() {
