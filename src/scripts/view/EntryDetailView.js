@@ -40,6 +40,7 @@ define(
 
 				if (this.entryData_.entry.mts && this.entryData_.entry.mts == 1) {
 					$('.mts-info').show();
+					$('#edit-entry-button').hide();
 				}
 			},
 
