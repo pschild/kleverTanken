@@ -29,7 +29,8 @@ define(
 
 			showGasstationChooserView_: function() {
 				var gasstationChooserViewModel = new GasstationChooserViewModel({
-					element: $('#gasstation-chooser-view-container')
+					element: $('#gasstation-chooser-view-container'),
+					emptyLabelText: 'alle'
 				});
 				gasstationChooserViewModel.getMainView().show();
 				gasstationChooserViewModel.populate();

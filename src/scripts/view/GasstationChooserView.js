@@ -12,6 +12,14 @@ define(
 
 			locationCollection_: null,
 
+			emptyLabelText_: 'bitte wählen...',
+
+			setEmptyLabelText: function(text) {
+				if (text) {
+					this.emptyLabelText_ = text;
+				}
+			},
+
 			doBind: function() {
 				$('#gasstation-chooser').on('change', this.getGasstationChooserChangeHandler_());
 			},
@@ -35,7 +43,7 @@ define(
 
 			populateGasstations_: function() {
 				$('#gasstation-chooser').append(
-					$('<option/>').val(-1).text('bitte wählen...')
+					$('<option/>').val(-1).text(this.emptyLabelText_)
 				);
 
 				this.gasstationCollection_.sortBy(function(value) {

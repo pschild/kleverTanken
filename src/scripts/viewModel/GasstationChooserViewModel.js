@@ -13,6 +13,7 @@ define(
 			doInitialize: function(options) {
 				this.mainView = new GasstationChooserView();
 				this.mainView.setElement(options.element);
+				this.mainView.setEmptyLabelText(options.emptyLabelText);
 
 				this.listenTo(this.mainView, 'gasstationchooserchange', this.handleGasstationChooserChange_);
 			},
