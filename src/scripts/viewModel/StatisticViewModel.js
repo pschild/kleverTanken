@@ -63,6 +63,10 @@ define(
 			},
 
 			handleLoadStatisticsButtonClick_: function() {
+				$('#load-statistics-button').attr('disabled', 'disabled');
+				$('.statistic-results').hide();
+				$('.loading-spinner').show();
+
 				var fuelsortId = $('#fuelsort-chooser').val();
 				var locationId = $('#location-chooser').val() || -1;
 
@@ -112,6 +116,9 @@ define(
 
 				this.mainView.renderStatisticResults(data);
 				this.mainView.renderChart(data.priceDevelopmentData);
+
+				$('#load-statistics-button').removeAttr('disabled')
+				$('.loading-spinner').hide();
 			}
 
 		});

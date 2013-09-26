@@ -5,6 +5,7 @@ require 'Slim-2.2.0/Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
 
 $app = new \Slim\Slim();
+sleep(2);
 
 $app->get('/statistic', function() use ($app) {
 	$request = $app->request();
