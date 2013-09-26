@@ -79,8 +79,3 @@
   @include icon('U', $default-icon-font-size);
   color: $app-error-background-color;
 }
-
-.icon-mts::before {
-  @include icon('a', $app-small-font-size);
-  color: darken($app-secondary-background-color, 50%);
-}
