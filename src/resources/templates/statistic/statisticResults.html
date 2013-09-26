@@ -1,12 +1,12 @@
 <div class="row statistic-row">
 	<div class="col-xs-4">
-		<div class="icon-minimum price-label"><%- (minPrice === 0) ? '?' : minPrice %> €</div>
+		<div class="icon-minimum price-label"><%- (minPrice === 0) ? '?' : minPrice.toFixed(2) %> €</div>
 	</div>
 	<div class="col-xs-4">
-		<div class="price-label">&empty; <%- (avgPrice === 0) ? '?' : avgPrice %> €</div>
+		<div class="price-label">&empty; <%- (avgPrice === 0) ? '?' : avgPrice.toFixed(2) %> €</div>
 	</div>
 	<div class="col-xs-4">
-		<div class="icon-maximum price-label"><%- (maxPrice === 0) ? '?' : maxPrice %> €</div>
+		<div class="icon-maximum price-label"><%- (maxPrice === 0) ? '?' : maxPrice.toFixed(2) %> €</div>
 	</div>
 </div>
 
@@ -15,13 +15,13 @@
 		<div class="icon-day"><b>Wann kann ich am besten tanken?</b></div>
 
 		<% if (cheapestDay && cheapestAvgPriceDay) { %>
-		<div class="icon-minimum"><%- cheapestDay %> (&empty; <%- cheapestAvgPriceDay %> €)</div>
+		<div class="icon-minimum"><%- cheapestDay %> (&empty; <%- cheapestAvgPriceDay.toFixed(2) %> €)</div>
 		<% } else { %>
 		<div><span class="icon-minimum"></span>keine Daten vorhanden</div>
 		<% } %>
 
 		<% if (mostExpensiveDay && mostExpensiveAvgPriceDay) { %>
-		<div class="icon-maximum"><%- mostExpensiveDay %> (&empty; <%- mostExpensiveAvgPriceDay %> €)</div>
+		<div class="icon-maximum"><%- mostExpensiveDay %> (&empty; <%- mostExpensiveAvgPriceDay.toFixed(2) %> €)</div>
 		<% } else { %>
 		<div><span class="icon-maximum"></span>keine Daten vorhanden</div>
 		<% } %>
@@ -32,13 +32,13 @@
 		<div class="icon-euro"><b>Wo kann ich am besten tanken?</b></div>
 
 		<% if (typeof locationData.cheapestLocation !== 'undefined') { %>
-		<div><span class="icon-minimum"></span><%- locationData.cheapestLocation.gasstation.name %>, <%- locationData.cheapestLocation.location.street %>, <%- locationData.cheapestLocation.location.city %> (&empty; <%- locationData.cheapestAvgPriceLocation %> €)</div>
+		<div><span class="icon-minimum"></span><%- locationData.cheapestLocation.gasstation.name %>, <%- locationData.cheapestLocation.location.street %>, <%- locationData.cheapestLocation.location.city %> (&empty; <%- locationData.cheapestAvgPriceLocation.toFixed(2) %> €)</div>
 		<% } else { %>
 		<div><span class="icon-minimum"></span>keine Daten vorhanden</div>
 		<% } %>
 
 		<% if (typeof locationData.mostExpensiveLocation !== 'undefined') { %>
-		<div><span class="icon-maximum"></span><%- locationData.mostExpensiveLocation.gasstation.name %>, <%- locationData.mostExpensiveLocation.location.street %>, <%- locationData.mostExpensiveLocation.location.city %> (&empty; <%- locationData.mostExpensiveAvgPriceLocation %> €)</div>
+		<div><span class="icon-maximum"></span><%- locationData.mostExpensiveLocation.gasstation.name %>, <%- locationData.mostExpensiveLocation.location.street %>, <%- locationData.mostExpensiveLocation.location.city %> (&empty; <%- locationData.mostExpensiveAvgPriceLocation.toFixed(2) %> €)</div>
 		<% } else { %>
 		<div><span class="icon-maximum"></span>keine Daten vorhanden</div>
 		<% } %>

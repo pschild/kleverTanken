@@ -35,7 +35,6 @@ $app->get('/entry', function() use ($app) {
 			'locationId' => (int) $row['locationId'],
 			'fuelsortId' => (int) $row['fuelsortId'],
 			'price' => (float) $row['price'],
-			'timestamp' => (int) $row['timestamp'],
 			'datetime' => $row['datetime'],
 			'confirmed' => (int) $row['confirmed'],
 			'deleted' => (int) $row['deleted'],
