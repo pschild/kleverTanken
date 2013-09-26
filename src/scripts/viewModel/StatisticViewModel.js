@@ -94,13 +94,15 @@ define(
 			},
 
 			loadStatisticResultsSuccess_: function(data) {
-				if (data.locationData) {
+				if (data.locationData && data.locationData.cheapestLocationId) {
 					var cheapestLocation = LocationCollection.findWhere('id', data.locationData.cheapestLocationId);
 					data.locationData.cheapestLocation = {
 						gasstation: GasstationCollection.findWhere('id', cheapestLocation.gasstationId),
 						location: cheapestLocation
 					};
+				}
 
+				if (data.locationData && data.locationData.mostExpensiveLocationId) {
 					var mostExpensiveLocation = LocationCollection.findWhere('id', data.locationData.mostExpensiveLocationId);
 					data.locationData.mostExpensiveLocation = {
 						gasstation: GasstationCollection.findWhere('id', mostExpensiveLocation.gasstationId),

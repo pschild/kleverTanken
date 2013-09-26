@@ -123,10 +123,10 @@ function getCheapestAndMostExpensiveDayByCriteria($fromDate, $toDate, $fuelsortI
 
 	if (count($data) === 0) {
 		return array(
-			'cheapestDayName' => 'n/a',
-			'mostExpensiveDayName' => 'n/a',
-			'cheapestAvgPrice' => 'n/a',
-			'mostExpensiveAvgPrice' => 'n/a'
+			'cheapestDayName' => false,
+			'mostExpensiveDayName' => false,
+			'cheapestAvgPrice' => false,
+			'mostExpensiveAvgPrice' => false
 		);
 	}
 
@@ -158,10 +158,10 @@ function getCheapestAndMostExpensiveLocationByCriteria($fromDate, $toDate, $fuel
 
 	if (count($data) === 0) {
 		return array(
-			'cheapestLocationId' => 'n/a',
-			'mostExpensiveLocationId' => 'n/a',
-			'cheapestAvgPrice' => 'n/a',
-			'mostExpensiveAvgPrice' => 'n/a'
+			'cheapestLocationId' => false,
+			'mostExpensiveLocationId' => false,
+			'cheapestAvgPrice' => false,
+			'mostExpensiveAvgPrice' => false
 		);
 	}
 
