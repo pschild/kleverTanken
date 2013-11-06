@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+require '_functions.php';
 
 /**
  * http://www.spritpreismonitor.de/suche
@@ -53,6 +54,15 @@ function applyData($fuelsortId, $data) {
 
 		$datetime = $entryData['datetime'];
 		$price = parsePrice($entryData['price']);
+
+		if ($fuelsortId === 1 && $price <= 1.48) {
+			$location = getLocationById($locationId);
+
+			sendMail(
+				'Jetzt Super tanken!',
+				$price . ', ' . $datetime . '<br/>' . $location['name'] . ', ' . $location['street'] . ', ' . $location['city']
+			);
+		}
 
 		if (wasAlreadyAdded($locationId, $fuelsortId, $price, $datetime) === true) {
 			continue;
@@ -115,12 +125,4 @@ function findLocationIdByMtskId($mtsk_id) {
 	}
 
 	return null;
-}
-
-function sendMail($subject, $mailBody) {
-	$mailHeader = 'MIME-Version: 1.0' . "\r\n";
-	$mailHeader .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-	$mailHeader .= 'From: Schildi <philippe.schild@googlemail.com>' . "\r\n";
-
-	mail('philippe.schild@googlemail.com', $subject, $mailBody, $mailHeader);
 }

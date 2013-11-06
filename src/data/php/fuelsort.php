@@ -1,5 +1,6 @@
 <?php
 require 'connection.php';
+require '_functions.php';
 
 require 'Slim-2.2.0/Slim/Slim.php';
 \Slim\Slim::registerAutoloader();
@@ -50,33 +51,3 @@ $app->delete('/fuelsort/:id', function($id) use ($app) {
 });
 
 $app->run();
-
-/**
- * Calculates the average price for the given fuelsortId.
- *
- * @param int $fuelsortId
- * [@param int|null $timeLimitInDays]
- * @return string
- */
-function getAveragePriceByFuelsortId($fuelsortId, $timeLimitInDays = null) {
-	$sql = ""
-		. "SELECT AVG(`price`) AS `avgPrice` FROM `" . ENTRY_TABLE . "` "
-		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
-		. "AND `deleted` = 0 "
-	;
-
-	if ($timeLimitInDays !== null) {
-		$sql .= ""
-			  . "AND `datetime` BETWEEN "
-			  . "(SELECT ADDDATE(MAX(`datetime`), INTERVAL -" . (int) $timeLimitInDays . " DAY) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
-			  . "AND "
-			  . "(SELECT MAX(`datetime`) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
-		;
-	}
-
-	$result = mysql_query($sql);
-	if ($result !== false) {
-		$row = mysql_fetch_assoc($result);
-		return $row['avgPrice'] === null ? '0.00' : round($row['avgPrice'], 2);
-	}
-}
