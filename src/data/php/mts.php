@@ -11,13 +11,13 @@ $superUrl = 'http://www.spritpreismonitor.de/suche/?tx_spritpreismonitor_pi1%5Bs
 $dieselUrl = 'http://www.spritpreismonitor.de/suche/?tx_spritpreismonitor_pi1%5BsearchRequest%5D%5BplzOrtGeo%5D=47533&tx_spritpreismonitor_pi1%5BsearchRequest%5D%5Bumkreis%5D=25&tx_spritpreismonitor_pi1%5BsearchRequest%5D%5Bkraftstoffart%5D=diesel&tx_spritpreismonitor_pi1%5BsearchRequest%5D%5Btankstellenbetreiber%5D=';
 $e10Url = 'http://www.spritpreismonitor.de/suche/?tx_spritpreismonitor_pi1%5BsearchRequest%5D%5BplzOrtGeo%5D=47533&tx_spritpreismonitor_pi1%5BsearchRequest%5D%5Bumkreis%5D=25&tx_spritpreismonitor_pi1%5BsearchRequest%5D%5Bkraftstoffart%5D=e10&tx_spritpreismonitor_pi1%5BsearchRequest%5D%5Btankstellenbetreiber%5D=';
 
-if ((int)$_GET['fuelsortId'] === 1) {
+if ((int) $_GET['fuelsortId'] === 1) {
 	$data = extractData($superUrl, 'e5');
 	applyData(1, $data);
-} else if ((int)$_GET['fuelsortId'] === 3) {
+} else if ((int) $_GET['fuelsortId'] === 3) {
 	$data = extractData($dieselUrl, 'diesel');
 	applyData(3, $data);
-} else if ((int)$_GET['fuelsortId'] === 5) {
+} else if ((int) $_GET['fuelsortId'] === 5) {
 	$data = extractData($e10Url, 'e10');
 	applyData(5, $data);
 }
@@ -46,6 +46,7 @@ function extractData($url, $fuelsortProperty) {
 
 function applyData($fuelsortId, $data) {
 	$count = 0;
+	$mailBody = '';
 	foreach ($data as $entryData) {
 		$locationId = findLocationIdByMtskId($entryData['mtsk_id']);
 		if ($locationId === null) {
@@ -55,17 +56,14 @@ function applyData($fuelsortId, $data) {
 		$datetime = $entryData['datetime'];
 		$price = parsePrice($entryData['price']);
 
+		if (wasAlreadyAdded($locationId, $fuelsortId, $price, $datetime) === true) {
+			continue;
+		}
+
 		if ($fuelsortId === 1 && $price <= 1.48) {
 			$location = getLocationById($locationId);
 
-			sendMail(
-				'Jetzt Super tanken!',
-				$price . ', ' . $datetime . '<br/>' . $location['name'] . ', ' . $location['street'] . ', ' . $location['city']
-			);
-		}
-
-		if (wasAlreadyAdded($locationId, $fuelsortId, $price, $datetime) === true) {
-			continue;
+			$mailBody .= '<b>' . $price . '</b>, ' . $datetime . '<br/>' . $location['name'] . ', ' . $location['street'] . ', ' . $location['city'] . '<br/><br/>';
 		}
 
 		$sql = ""
@@ -80,6 +78,13 @@ function applyData($fuelsortId, $data) {
 	}
 
 	echo $count . ' Eintraege hinzugefuegt.';
+
+	if ($fuelsortId === 1 && $mailBody !== '') {
+		sendMail(
+			'Jetzt Super tanken!',
+			$mailBody
+		);
+	}
 }
 
 function wasAlreadyAdded($locationId, $fuelsortId, $price, $datetime) {
@@ -110,8 +115,7 @@ function findLocationIdByMtskId($mtsk_id) {
 	$sql = ""
 		. "SELECT `id` "
 		. "FROM `" . LOCATION_TABLE . "` "
-		. "WHERE `mtsk_id` = '" . $mtsk_id . "' "
-	;
+		. "WHERE `mtsk_id` = '" . $mtsk_id . "' ";
 
 	$result = mysql_query($sql);
 	if ($result !== false) {

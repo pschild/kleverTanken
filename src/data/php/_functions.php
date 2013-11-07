@@ -12,15 +12,14 @@ function getAveragePriceByFuelsortId($fuelsortId, $timeLimitInDays = null) {
 	$sql = ""
 		. "SELECT AVG(`price`) AS `avgPrice` FROM `" . ENTRY_TABLE . "` "
 		. "WHERE `fuelsortId` = " . (int) $fuelsortId . " "
-		. "AND `deleted` = 0 "
-	;
+		. "AND `deleted` = 0 ";
 
 	if ($timeLimitInDays !== null) {
 		$sql .= ""
-			  . "AND `datetime` BETWEEN "
-			  . "(SELECT ADDDATE(MAX(`datetime`), INTERVAL -" . (int) $timeLimitInDays . " DAY) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
-			  . "AND "
-			  . "(SELECT MAX(`datetime`) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
+			. "AND `datetime` BETWEEN "
+			. "(SELECT ADDDATE(MAX(`datetime`), INTERVAL -" . (int) $timeLimitInDays . " DAY) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
+			. "AND "
+			. "(SELECT MAX(`datetime`) FROM `" . ENTRY_TABLE . "` WHERE `fuelsortId` = " . (int) $fuelsortId . " AND `deleted` = 0) "
 		;
 	}
 
@@ -35,6 +34,7 @@ function getLocationById($locationId) {
 	$sql = ""
 		. "SELECT `street`, `city`, `name` FROM `" . LOCATION_TABLE . "`, `" . GASSTATION_TABLE . "` "
 		. "WHERE `" . LOCATION_TABLE . "`.`id` = " . (int) $locationId . " "
+		. "AND  `" . LOCATION_TABLE . "`.`gasstationId` =  `" . GASSTATION_TABLE . "`.`id` "
 	;
 
 	$result = mysql_query($sql);
