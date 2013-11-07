@@ -1,6 +1,6 @@
 <?php
-require 'connection.php';
-require '_functions.php';
+require_once 'connection.php';
+require_once '_functions.php';
 
 /**
  * http://www.spritpreismonitor.de/suche

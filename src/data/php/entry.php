@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require_once 'connection.php';
 
 require 'Slim-2.2.0/Slim/Slim.php';
 \Slim\Slim::registerAutoloader();

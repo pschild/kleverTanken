@@ -1,5 +1,5 @@
 <?php
-require 'connection.php';
+require_once 'connection.php';
 
 /**
  * Calculates the average price for the given fuelsortId.
