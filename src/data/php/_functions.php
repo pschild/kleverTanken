@@ -48,7 +48,7 @@ function getLocationById($locationId) {
 function sendMail($subject, $mailBody) {
 	$mailHeader = 'MIME-Version: 1.0' . "\r\n";
 	$mailHeader .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-	$mailHeader .= 'From: Schildi <philippe.schild@googlemail.com>' . "\r\n";
+	$mailHeader .= 'From: Philippe <philippe@pschild.de>' . "\r\n";
 
 	mail('philippe.schild@googlemail.com', $subject, $mailBody, $mailHeader);
 }
