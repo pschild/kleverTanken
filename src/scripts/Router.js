@@ -8,9 +8,9 @@
 define(
 	[
 		'jquery', 'underscore', 'mixin/EventsMixin', 'mixin/ExtendMixin', 'History',
-		'viewModel/EntryListViewModel', 'viewModel/EntryDetailViewModel', 'viewModel/EntryCreatorViewModel', 'viewModel/StatisticViewModel', 'viewModel/ImprintViewModel'
+		'viewModel/EntryListViewModel', 'viewModel/EntryMapViewModel', 'viewModel/EntryDetailViewModel', 'viewModel/EntryCreatorViewModel', 'viewModel/StatisticViewModel', 'viewModel/ImprintViewModel'
 	],
-	function($, _, EventsMixin, ExtendMixin, History, EntryListViewModel, EntryDetailViewModel, EntryCreatorViewModel, StatisticViewModel, ImprintViewModel) {
+	function($, _, EventsMixin, ExtendMixin, History, EntryListViewModel, EntryMapViewModel, EntryDetailViewModel, EntryCreatorViewModel, StatisticViewModel, ImprintViewModel) {
 		'use strict';
 
 		// Routers map faux-URLs to actions, and fire events when routes are
@@ -33,6 +33,7 @@ define(
 			routes: {
 				'': 'showEntryListView',
 				'entryList': 'showEntryListView',
+				'entryMap': 'showEntryMapView',
 				'entryDetail/:id': 'showEntryDetailView',
 				'entryCreator': 'showEntryCreatorView',
 				'entryCreator/:id': 'showEntryCreatorView',
@@ -45,6 +46,10 @@ define(
 			viewModels: {
 				'entryListViewModel': {
 					'clazz': EntryListViewModel,
+					'instance': undefined
+				},
+				'entryMapViewModel': {
+					'clazz': EntryMapViewModel,
 					'instance': undefined
 				},
 				'entryDetailViewModel': {
@@ -175,6 +180,10 @@ define(
 
 			showEntryListView: function() {
 				this.showView('entryListViewModel');
+			},
+
+			showEntryMapView: function() {
+				this.showView('entryMapViewModel');
 			},
 
 			showEntryDetailView: function(entryId) {
