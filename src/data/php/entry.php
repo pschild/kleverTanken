@@ -46,6 +46,36 @@ $app->get('/entry', function() use ($app) {
 	echo json_encode($rows);
 });
 
+$app->get('/latestEntries', function() use ($app) {
+	$oneMonthAgo = date('Y-m-d', time() - 60 * 60 * 24 * 31);
+
+	$sql = ""
+		 . "SELECT * FROM "
+		 . "("
+			 . "SELECT * FROM `" . ENTRY_TABLE . "` "
+			 . "WHERE `deleted` <> 1 "
+			 . "AND `datetime` > '" . $oneMonthAgo . "' "
+			 . "ORDER BY `datetime` DESC "
+		 . ") AS `subTable` "
+		 . "GROUP BY `locationId`, `fuelsortId` "
+	;
+	$result = mysql_query($sql);
+
+	$rows = array();
+	while ($row = mysql_fetch_array($result)) {
+		$rows[] = array(
+			'locationId' => (int) $row['locationId'],
+			'fuelsortId' => (int) $row['fuelsortId'],
+			'price' => (float) $row['price'],
+			'datetime' => $row['datetime'],
+			'mts' => (int) $row['mts']
+		);
+	}
+
+	$app->response()->header('Content-Type', 'application/json');
+	echo json_encode($rows);
+});
+
 $app->post('/entry', function() use ($app) {
 	$entryData = (array) json_decode($app->request()->getBody(), true);
 
