@@ -4,6 +4,9 @@
   z-index: 999;
   top: 0px;
 
+  -webkit-box-shadow: #000 0px 0px $toolbar-shadow-blur-radius;
+  box-shadow: #000 0px 0px $toolbar-shadow-blur-radius;
+
   .toolbar {
 	height: $toolbar-height;
 	background-color: $toolbar-background-color;
