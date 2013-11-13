@@ -36,6 +36,7 @@ define(
 			initMap: function(entries) {
 				var that = this;
 
+				$('#map').height($(window).height() - $('#toolbar-container').height() - 20);
 				var map = $('#map').initMap({
 					center: 'Kleve, Germany',
 					type: 'roadmap',
