@@ -12,5 +12,5 @@
 #app-container {
   -webkit-user-select: none;
   display: none;
-  margin-top: 15px;
+  margin-top: $toolbar-height + 15;
 }

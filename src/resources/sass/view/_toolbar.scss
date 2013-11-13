@@ -1,4 +1,9 @@
 #toolbar-container {
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  top: 0px;
+
   .toolbar {
 	height: $toolbar-height;
 	background-color: $toolbar-background-color;
