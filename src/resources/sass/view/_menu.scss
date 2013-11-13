@@ -23,6 +23,7 @@
 
 #menu-container {
   -webkit-user-select: none;
+  overflow: hidden;
 
   .menu {
 	background: $menu-background-color;
@@ -41,7 +42,7 @@
 
   .menu-vertical {
 	width: $menu-width;
-	height: 9999px;
+	height: 100%;
 	top: 0;
 	z-index: 1000;
 

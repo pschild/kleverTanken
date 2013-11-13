@@ -23,10 +23,11 @@ define(
 				/* Workaround: prevent scrolling when body-height is greater than viewport by setting overflow to hidden */
 				if ($('#menu-mask').hasClass('visible')) {
 					$('body').css('overflow', 'hidden');
+					$('.menu-vertical').css('height', 1000);
 				} else {
 					$('body').css('overflow', 'auto');
+					$('.menu-vertical').css('height', '100%');
 				}
-
 			},
 
 			handleToggleMenuClick_: function() {
