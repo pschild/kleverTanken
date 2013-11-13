@@ -34,6 +34,8 @@ define(
 			},
 
 			initMap: function(entries) {
+				var that = this;
+
 				var map = $('#map').initMap({
 					center: 'Kleve, Germany',
 					type: 'roadmap',
@@ -50,27 +52,23 @@ define(
 					var location = LocationCollection.findWhere('id', locationId);
 					var gasstation = GasstationCollection.findWhere('id', location.gasstationId);
 
-					var infoHtml = gasstation.name + ', ' + location.street + ', ' + location.city + '<br/><br/>';
+					var markerData = {
+						location: location,
+						gasstation: gasstation,
+						fuelsorts: []
+					};
+
 					_.each(locationObj, function(fuelsortObj) {
 						var fuelsortId = fuelsortObj.fuelsortId;
-						var fuelsortName = FuelsortCollection.findWhere('id', fuelsortId).name;
-						var elapsedTime = datetimeMixin.mapElapsedTime(fuelsortObj.datetime);
 
-						infoHtml += fuelsortName + ': ' + fuelsortObj.price + '<sup>9</sup> (' + elapsedTime + ')<br/>';
+						markerData.fuelsorts.push({
+							name: FuelsortCollection.findWhere('id', fuelsortId).name,
+							elapsedTime: datetimeMixin.mapElapsedTime(fuelsortObj.datetime),
+							price: fuelsortObj.price
+						});
 					});
-					
-					map.markers.add({
-						myGasstation: {
-							position: [
-								location.latitude, location.longitude
-							],
-							info_window: {
-								content: infoHtml,
-								maxWidth: 350,
-								zIndex: 1
-							}
-						}
-					});
+
+					that.mainView.renderMarker(map, markerData);
 				});
 			}
 
