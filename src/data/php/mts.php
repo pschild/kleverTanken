@@ -91,7 +91,7 @@ function wasAlreadyAdded($locationId, $fuelsortId, $price, $datetime) {
 	$sql = ""
 		. "SELECT `id` "
 		. "FROM `" . ENTRY_TABLE . "` "
-		. "WHERE `locationId` = " . $locationId . " AND `fuelsortId` = " . $fuelsortId . " AND `price` = " . $price . " AND `datetime` = '" . $datetime . "' AND `mts` = 1 "
+		. "WHERE `locationId` = " . (int) $locationId . " AND `fuelsortId` = " . (int) $fuelsortId . " AND `price` = " . $price . " AND `datetime` = '" . $datetime . "' AND `mts` = 1 "
 	;
 	$result = mysql_query($sql);
 	if ($result !== false) {

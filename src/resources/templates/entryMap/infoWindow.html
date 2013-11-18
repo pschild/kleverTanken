@@ -2,5 +2,5 @@
 <%- gasstation.name %>, <%- location.street %>, <%- location.city %>
 </p>
 <% _.each(fuelsorts, function(fuelsort) { %>
-	<%- fuelsort.name %>: <b><%- fuelsort.price %><sup>9</sup></b> (<%- fuelsort.elapsedTime %>)<br/>
+	<%- fuelsort.name %>: <b><%- fuelsort.price.toFixed(2) %><sup>9</sup></b> (<%- fuelsort.elapsedTime %>)<br/>
 <% }); %>
