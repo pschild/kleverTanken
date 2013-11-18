@@ -63,7 +63,7 @@ function applyData($fuelsortId, $data) {
 		if ($fuelsortId === 1 && $price <= 1.48) {
 			$location = getLocationById($locationId);
 
-			$mailBody .= '<b>' . $price . '</b>, ' . $datetime . '<br/>' . $location['name'] . ', ' . $location['street'] . ', ' . $location['city'] . '<br/><br/>';
+			$mailBody .= $location['name'] . ', ' . $location['street'] . ', ' . $location['city'] . '<br/>Super für <b>' . $price . '</b> (' . $datetime . ')<br/><br/>';
 		}
 
 		$sql = ""
@@ -81,7 +81,7 @@ function applyData($fuelsortId, $data) {
 
 	if ($fuelsortId === 1 && $mailBody !== '') {
 		sendMail(
-			'Jetzt Super tanken!',
+			'Jetzt günstig Super tanken!',
 			$mailBody
 		);
 	}
