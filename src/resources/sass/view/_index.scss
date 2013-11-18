@@ -12,5 +12,5 @@
 #app-container {
   -webkit-user-select: none;
   display: none;
-  margin-top: $toolbar-height + 15;
+  margin-top: $toolbar-height + $app-container-margin-top;
 }

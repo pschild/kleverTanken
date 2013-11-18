@@ -1,0 +1,4 @@
+/* Workaround: the app-container has a top margin and so the date/time-picker is not placed correctly */
+.dw-persp {
+  top: -($toolbar-height + $app-container-margin-top);
+}
