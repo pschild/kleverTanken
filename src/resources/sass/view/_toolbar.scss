@@ -4,8 +4,7 @@
   z-index: 999;
   top: 0px;
 
-  -webkit-box-shadow: #000 0px 0px $toolbar-shadow-blur-radius;
-  box-shadow: #000 0px 0px $toolbar-shadow-blur-radius;
+  @include outer-shadow(0px, 0px, $toolbar-shadow-blur-radius, 0px, #000);
 
   .toolbar {
 	height: $toolbar-height;

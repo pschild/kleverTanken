@@ -17,6 +17,7 @@
 @import "lib/mobiscroll-fix";
 
 /* mixins */
+@import "mixin/vendor-prefix-wrapper";
 @import "mixin/font-icons";
 @import "mixin/checkbox";
 @import "mixin/loading-indicator";

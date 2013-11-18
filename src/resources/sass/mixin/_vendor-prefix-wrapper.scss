@@ -1,0 +1,52 @@
+@mixin rotate($degree) {
+  -webkit-transform: rotate($degree + deg);
+  -moz-transform: rotate($degree + deg);
+  -ms-transform: rotate($degree + deg);
+  -o-transform: rotate($degree + deg);
+  transform: rotate($degree + deg);
+}
+
+@mixin translate($x, $y) {
+  -webkit-transform: translate($x, $y);
+  -moz-transform: translate($x, $y);
+  -ms-transform: translate($x, $y);
+  -o-transform: translate($x, $y);
+  transform: translate($x, $y);
+}
+
+@mixin transition($property, $duration, $type) {
+  -webkit-transition: $property $duration $type;
+  -moz-transition: $property $duration $type;
+  -ms-transition: $property $duration $type;
+  -o-transition: $property $duration $type;
+  transition: $property $duration $type;
+}
+
+@mixin outer-shadow($hShadow, $vShadow, $blur, $spread, $color) {
+  -webkit-box-shadow: $hShadow $vShadow $blur $spread $color;
+  -moz-box-shadow: $hShadow $vShadow $blur $spread $color;
+  -ms-box-shadow: $hShadow $vShadow $blur $spread $color;
+  -o-box-shadow: $hShadow $vShadow $blur $spread $color;
+  box-shadow: $hShadow $vShadow $blur $spread $color;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin animation($name, $duration, $timing-function, $delay: 0s, $iteration-count: infinite) {
+  -webkit-animation: $name $duration $timing-function $delay $iteration-count;
+  -moz-animation: $name $duration $timing-function $delay $iteration-count;
+  -ms-animation: $name $duration $timing-function $delay $iteration-count;
+  -o-animation: $name $duration $timing-function $delay $iteration-count;
+  animation: $name $duration $timing-function $delay $iteration-count;
+}
+
+@mixin animation-delay($delay) {
+  -webkit-animation-delay: $delay;
+  -moz-animation-delay: $delay;
+  -ms-animation-delay: $delay;
+  -o-animation-delay: $delay;
+  animation-delay: $delay;
+}

@@ -11,10 +11,7 @@
 
   &.visible {
 	display: block;
-
-	-webkit-transition: opacity $menu-transition-time $menu-transition-type;
-	-moz-transition: opacity $menu-transition-time $menu-transition-type;
-	transition: opacity $menu-transition-time $menu-transition-type;
+	@include transition(opacity, $menu-transition-time, $menu-transition-type);
 
 	opacity: 0.3;
 	z-index: 1000;
@@ -54,13 +51,11 @@
 
   .menu-left {
   /* use translate instead of left => better performance */
-	-webkit-transform: translate(-$menu-width, 0px);
-	-moz-transform: translate(-$menu-width, 0px);
+	@include translate(-$menu-width, 0px);
 
 	&.menu-open {
 	  /* use translate instead of left => better performance */
-	  -webkit-transform: translate(0px, 0px);
-	  -moz-transform: translate(0px, 0px);
+	  @include translate(0px, 0px);
 	}
   }
 }
@@ -83,7 +78,5 @@
   -webkit-transform-style: preserve-3d;
   -moz-transform-style: preserve-3d;
 
-  -webkit-transition: all $menu-transition-time $menu-transition-type;
-  -moz-transition: all $menu-transition-time $menu-transition-type;
-  transition: all $menu-transition-time $menu-transition-type;
+  @include transition(all, $menu-transition-time, $menu-transition-type);
 }

@@ -5,10 +5,7 @@
   position: relative;
   border: $border-width solid lighten($app-primary-background-color, 40%);
   border-radius: 100%;
-  -webkit-animation: rotation $duration infinite linear;
-  -moz-animation: rotation $duration infinite linear;
-  -o-animation: rotation $duration infinite linear;
-  animation: rotation $duration infinite linear;
+  @include animation(rotation, $duration, linear);
 
   &:before {
 	content: '';
@@ -36,11 +33,7 @@
   border-left: $border-width solid transparent;
   border-right: $border-width solid transparent;
 
-  -webkit-animation: rotation $duration infinite linear;
-  -moz-animation: rotation $duration infinite linear;
-  -ms-animation: rotation $duration infinite linear;
-  -o-animation: rotation $duration infinite linear;
-  animation: rotation $duration infinite linear;
+  @include animation(rotation, $duration, linear);
 }
 
 @-webkit-keyframes rotation {
@@ -60,10 +53,67 @@
    to {transform: rotate(359deg);}
 }
 
+@mixin dots-loading-indicator($dot-radius) {
+  text-align: center;
+  width: 100%;
+
+  & > * {
+	background-color: $app-primary-background-color;
+	display: inline-block;
+	height: $dot-radius * 2;
+	width: $dot-radius * 2;
+	@include border-radius($dot-radius);
+	margin: 0 5px;
+	opacity: 0.8;
+
+	@include animation(appLoadingIndicator, 1s, ease-in-out);
+  }
+
+  .first {
+	@include animation-delay(0s);
+  }
+
+  .second {
+	@include animation-delay(0.15s);
+  }
+
+  .third {
+	@include animation-delay(0.3s);
+  }
+}
+
+@-webkit-keyframes appLoadingIndicator {
+  0% { opacity: 0.8; }
+  50% { opacity: 0; }
+  100% { opacity: 0.8; }
+}
+
+@-moz-keyframes appLoadingIndicator {
+  0% { opacity: 0.8; }
+  50% { opacity: 0; }
+  100% { opacity: 0.8; }
+}
+
+@-o-keyframes appLoadingIndicator {
+  0% { opacity: 0.8; }
+  50% { opacity: 0; }
+  100% { opacity: 0.8; }
+}
+
+@keyframes appLoadingIndicator {
+  0% { opacity: 0.8; }
+  50% { opacity: 0; }
+  100% { opacity: 0.8; }
+}
+
 .big-spinner {
   @include double-spinner(150px, 10px, 1s);
 }
 
 .small-spinner {
   @include double-spinner(20px, 2px, 1s);
+}
+
+.dots-indicator {
+  @include dots-loading-indicator(15px);
 }
