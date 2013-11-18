@@ -3,7 +3,7 @@ define(
 		'jquery', 'underscore', 'Router',
 		'viewModel/ToolbarViewModel', 'viewModel/MenuViewModel',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
-		'nprogress', 'jquery-fast-click'
+		'nprogress', 'jquery-fast-click', 'jquery-cookie'
 	],
 	function($, _, Router, ToolbarViewModel, MenuViewModel, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection) {
 		'use strict';
@@ -97,6 +97,8 @@ define(
 				this.showMenu_();
 				this.showContent_();
 				this.hideLoadingIndicator_();
+
+				//this.showNewsNotification_();
 			},
 
 			showToolbar_: function() {
@@ -117,6 +119,14 @@ define(
 				$('.loading-indicator-wrapper').fadeOut(500, function() {
 					$(this).remove();
 				});
+			},
+
+			showNewsNotification_: function() {
+				var cookieValue = $.cookie('alreadyVisited');
+				if (!cookieValue) {
+					$.cookie('alreadyVisited', 'yes');
+					alert('This seems to be your first visit!');
+				}
 			}
 		});
 		

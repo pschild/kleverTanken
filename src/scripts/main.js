@@ -15,6 +15,7 @@ require.config({
 		nprogress: 'lib/nprogress',
 		alertify: 'lib/alertify',
 		chartJs: 'lib/Chart',
+		'jquery-cookie': 'lib/jquery.cookie',
 
 		/* @see http://jeromesmadja.github.io/initmapjs/documentation.html */
 		initmap: 'lib/initmap.min',
@@ -46,6 +47,10 @@ require.config({
 			exports: '$'
 		},
 		alertify: {
+			deps: ['jquery'],
+			exports: '$'
+		},
+		'jquery-cookie': {
 			deps: ['jquery'],
 			exports: '$'
 		},
