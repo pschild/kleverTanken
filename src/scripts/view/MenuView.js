@@ -1,7 +1,7 @@
 define(
 	[
 		'jquery', 'underscore', 'view/View',
-		'text!templates/menu.html'
+		'text!templates/menu/menu.html'
 	],
 	function($, _, View, menuTemplate) {
 		'use strict';

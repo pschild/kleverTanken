@@ -1,11 +1,11 @@
 define(
 	[
 		'jquery', 'underscore', 'Router',
-		'viewModel/ToolbarViewModel', 'viewModel/MenuViewModel',
+		'viewModel/ToolbarViewModel', 'viewModel/MenuViewModel', 'viewModel/DesktopMenuViewModel',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
 		'nprogress', 'jquery-fast-click', 'jquery-cookie'
 	],
-	function($, _, Router, ToolbarViewModel, MenuViewModel, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection) {
+	function($, _, Router, ToolbarViewModel, MenuViewModel, DesktopMenuViewModel, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection) {
 		'use strict';
 	
 		function Application(options) {
@@ -95,6 +95,7 @@ define(
 				Router.start();
 				this.showToolbar_();
 				this.showMenu_();
+				this.showDesktopMenu_();
 				this.showContent_();
 				this.hideLoadingIndicator_();
 
@@ -109,6 +110,13 @@ define(
 			showMenu_: function() {
 				var menuViewModel = new MenuViewModel();
 				menuViewModel.getMainView().show();
+			},
+
+			showDesktopMenu_: function() {
+				var desktopMenuViewModel = new DesktopMenuViewModel({
+					element: $('#desktop-menu-container')
+				});
+				desktopMenuViewModel.getMainView().show();
 			},
 
 			showContent_: function() {

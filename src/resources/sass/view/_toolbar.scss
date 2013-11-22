@@ -12,15 +12,16 @@
 	color: $toolbar-font-color;
 
 	.menu-toggle {
-	  display: inline-block;
+	  position: absolute;
+	  line-height: $toolbar-height;
 	  cursor: pointer;
 	}
 
 	.toolbar-headline {
 	  display: inline-block;
 	  font-size: $app-medium-font-size;
-	  margin-top: 15px;
-	  margin-left: 15px;
+	  line-height: $toolbar-height;
+	  margin-left: 50px;
 	}
   }
 }

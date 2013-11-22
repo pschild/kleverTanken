@@ -18,8 +18,32 @@
   }
 }
 
-#menu-container {
+#desktop-menu-container, #menu-container {
   -webkit-user-select: none;
+
+  a {
+	color: $app-secondary-font-color;
+	text-decoration: none;
+  }
+}
+
+#desktop-menu-container {
+  position: absolute;
+  top: 0px;
+  text-align: right;
+  width: 100%;
+  line-height: $toolbar-height;
+
+  .desktop-menu {
+	padding-right: 15px;
+
+	a {
+	  margin-right: 10px;
+	}
+  }
+}
+
+#menu-container {
   overflow: hidden;
 
   .menu {
@@ -28,8 +52,6 @@
 
 	a {
 	  display: block;
-	  color: $app-secondary-font-color;
-	  text-decoration: none;
 
 	  &:hover {
 		background: $menu-hover-background-color;
