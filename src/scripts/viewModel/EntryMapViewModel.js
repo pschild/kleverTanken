@@ -9,7 +9,7 @@ define(
 		'view/EntryMapView',
 		'initmap'
 	],
-	function(_, ViewModel, eventBus, datetimeMixin, config, EntryCollection, FuelsortCollection, GasstationCollection, LocationCollection, EntryMapView, initmap) {
+	function(_, ViewModel, eventBus, datetimeMixin, config, EntryCollection, FuelsortCollection, GasstationCollection, LocationCollection, EntryMapView) {
 		'use strict';
 
 		var EntryMapViewModel = ViewModel.extend({

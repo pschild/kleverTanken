@@ -5,7 +5,6 @@ require.config({
 		jquery: 'lib/jquery-1.9.1.min',
 		underscore: 'lib/underscore-min',
 		text: 'lib/text-2.0.7',
-		async: 'lib/async',
 
 		/* jQuery-Plugins */
 		'mobiscroll.core': 'lib/mobiscroll/mobiscroll.core',
@@ -19,8 +18,6 @@ require.config({
 
 		/* @see http://jeromesmadja.github.io/initmapjs/documentation.html */
 		initmap: 'lib/initmap.min',
-		/* @see https://developers.google.com/maps/documentation/javascript/reference */
-		GoogleMapsWrapper: 'mixin/GoogleMaps',
 
 		templates: '../resources/templates'
 	},
@@ -55,7 +52,7 @@ require.config({
 			exports: '$'
 		},
 		initmap: {
-			deps: ['jquery', 'GoogleMapsWrapper'],
+			deps: ['jquery'],
 			exports: '$'
 		}
 	},
