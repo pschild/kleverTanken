@@ -40,7 +40,7 @@ define(
 				var models = options.data || {};
 
 				$.ajax({
-					url: 'data/php/entry.php/entry',
+					url: config.baseUrl + 'entry.php/entry',
 					data: JSON.stringify(models),
 					type: 'POST',
 					dataType: 'json',
@@ -71,7 +71,7 @@ define(
 
 				var that = this;
 				$.ajax({
-					url: 'data/php/entry.php/entry/' + entryId,
+					url: config.baseUrl + 'entry.php/entry/' + entryId,
 					data: JSON.stringify(newModel),
 					type: 'PUT',
 					dataType: 'json',
@@ -102,7 +102,7 @@ define(
 				var data = options.data || {};
 
 				$.ajax({
-					url: 'data/php/entry.php/entry/' + data.entryId,
+					url: config.baseUrl + 'entry.php/entry/' + data.entryId,
 					type: 'DELETE',
 					dataType: 'json',
 					contentType: 'application/json',
