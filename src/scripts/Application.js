@@ -3,7 +3,7 @@ define(
 		'jquery', 'underscore', 'Router',
 		'viewModel/ToolbarViewModel', 'viewModel/MenuViewModel', 'viewModel/DesktopMenuViewModel',
 		'collection/EntryCollection', 'collection/GasstationCollection', 'collection/LocationCollection', 'collection/FuelsortCollection',
-		'nprogress', 'jquery-fast-click', 'jquery-cookie'
+		'jquery-fast-click', 'jquery-cookie'
 	],
 	function($, _, Router, ToolbarViewModel, MenuViewModel, DesktopMenuViewModel, EntryCollection, GasstationCollection, LocationCollection, FuelsortCollection) {
 		'use strict';
@@ -33,9 +33,6 @@ define(
 			},
 			
 			loadCollections: function() {
-				NProgress.configure({ showSpinner: false });
-				NProgress.start();
-
 				EntryCollection.load({
 					success: this.handleEntryCollectionLoaded_,
 					scope: this
@@ -78,7 +75,16 @@ define(
 			},
 
 			checkCollectionsLoaded_: function() {
-				NProgress.inc(0.25);
+				$('.wave').animate({
+					top: '-=25%'
+				}, {
+					complete: function() {
+						$('.percent-label').html(
+							parseInt($('.percent-label').html()) + 25
+						);
+					}
+				});
+
 				if (
 					this.gasstationCollectionLoaded_
 					&& this.entryCollectionLoaded_
@@ -90,16 +96,16 @@ define(
 			},
 
 			launchApplication: function() {
-				NProgress.done();
-
-				Router.start();
-				this.showToolbar_();
-				this.showMenu_();
-				this.showDesktopMenu_();
-				this.showContent_();
-				this.hideLoadingIndicator_();
-
-				//this.showNewsNotification_();
+				var that = this;
+				$('.wave').animate({
+					top: '5%'
+				}, {
+					complete: function() {
+						Router.start();
+						that.hideLoadingIndicator_();
+						//that.showNewsNotification_();
+					}
+				});
 			},
 
 			showToolbar_: function() {
@@ -124,8 +130,13 @@ define(
 			},
 
 			hideLoadingIndicator_: function() {
-				$('.loading-indicator-wrapper').fadeOut(500, function() {
+				var that = this;
+				$('.loading-indicator').fadeOut(500, function() {
 					$(this).remove();
+					that.showToolbar_();
+					that.showMenu_();
+					that.showDesktopMenu_();
+					that.showContent_();
 				});
 			},
 

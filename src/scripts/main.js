@@ -11,7 +11,6 @@ require.config({
 		'mobiscroll.datetime': 'lib/mobiscroll/mobiscroll.datetime',
 		'mobiscroll.i18n.de': 'lib/mobiscroll/i18n/mobiscroll.i18n.de',
 		'jquery-fast-click': 'lib/jquery-fast-click',
-		nprogress: 'lib/nprogress',
 		alertify: 'lib/alertify',
 		chartJs: 'lib/Chart',
 		'jquery-cookie': 'lib/jquery.cookie',
