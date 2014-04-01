@@ -58,18 +58,18 @@ define(
 					avgPrices.push(parseFloat(data.avgOverall).toFixed(2));
 				}, this));
 
+				var usedDates = [];
+				for (var i = 0; i < labels.length; i++) {
+					if ($.inArray(labels[i], usedDates) < 0) {
+						usedDates.push(labels[i]);
+					} else {
+						labels[i] = '';
+					}
+				}
+
 				var chartWidth = 400;
 				if (labels.length > 10) {
 					chartWidth = 400 + labels.length * 10;
-					for (var i = 0; i < labels.length; i++) {
-						if (
-							i > 0
-								&& i !== labels.length - 1
-								&& i !== Math.floor(labels.length / 2)
-							) {
-							labels[i] = '';
-						}
-					}
 				}
 
 				var lineChartData = {
@@ -81,8 +81,8 @@ define(
 							data: prices
 						},
 						{
-							fillColor: 'rgba(0, 0, 0, 0.2)',
-							strokeColor: 'rgba(0, 0, 0, 0.0)',
+							fillColor: 'rgba(0, 0, 0, 0.1)',
+							strokeColor: 'rgba(0, 0, 0, 0.4)',
 							data: avgPrices
 						}
 					]
@@ -102,10 +102,11 @@ define(
 					animation: false
 				};
 
+				var $statisticChartContainer = $('.statistic-chart');
 				var chart = $('<canvas/>').attr('id', 'chart').attr('width', chartWidth).attr('height', 300);
-				$('.statistic-chart').empty().append(chart);
+				$statisticChartContainer.empty().append(chart);
 				new Chart(document.getElementById('chart').getContext('2d')).Line(lineChartData, options);
-				$('.statistic-chart').css('display', 'block');
+				$statisticChartContainer.css('display', 'block');
 			},
 
 			populateFuelsorts_: function() {
