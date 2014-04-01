@@ -1,4 +1,5 @@
 .sass-cache
 .idea
 target
+node_modules
 src/resources/css
