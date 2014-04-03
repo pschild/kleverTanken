@@ -54,14 +54,14 @@ define(
 				var that = this;
 				return function() {
 					that.trigger('editentry');
-				}
+				};
 			},
 
 			getDeleteEntryButtonClickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('deleteentry');
-				}
+				};
 			}
 		});
 		

@@ -119,14 +119,14 @@ define(
 				var that = this;
 				return function() {
 					that.trigger('saveentry', that.entry_);
-				}
+				};
 			},
 
 			getCancelEditButtonClickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('canceledit');
-				}
+				};
 			},
 
 			getFuelsortLabelClickHandler_: function() {
@@ -134,21 +134,21 @@ define(
 				return function() {
 					var $checkbox = $(this).parent().find('input[type=checkbox]');
 					that.trigger('fuelsortlabelclick', $checkbox);
-				}
+				};
 			},
 
 			getDecrementPriceButtonClickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('decrementprice', this);
-				}
+				};
 			},
 
 			getIncrementPriceButtonClickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('incrementprice', this);
-				}
+				};
 			}
 		});
 		

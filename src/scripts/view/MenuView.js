@@ -31,21 +31,21 @@ define(
 				var that = this;
 				return function() {
 					that.trigger('menutoggle');
-				}
+				};
 			},
 
 			getMenuItemClickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('menuitemclick');
-				}
+				};
 			},
 
 			getMenuMasklickHandler_: function() {
 				var that = this;
 				return function() {
 					that.trigger('menumaskclick');
-				}
+				};
 			}
 		});
 		

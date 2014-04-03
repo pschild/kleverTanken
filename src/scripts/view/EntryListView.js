@@ -62,7 +62,7 @@ define(
 				var that = this;
 				return function() {
 					that.trigger('loadmore');
-				}
+				};
 			}
 		});
 		

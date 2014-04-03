@@ -8,8 +8,9 @@ define(
 					return;
 				}
 
+				var germanDate;
 				if (returnWithTime) {
-					var germanDate = datetimeString.match(/^(\d{2}).(\d{2}).(\d{4}) (\d{2}):(\d{2})[:(\d{2})]?$/);
+					germanDate = datetimeString.match(/^(\d{2}).(\d{2}).(\d{4}) (\d{2}):(\d{2})[:(\d{2})]?$/);
 					return new Date(
 						germanDate[3],
 						germanDate[2] - 1,
@@ -19,7 +20,7 @@ define(
 						germanDate[6] || '00' /* seconds-param is optional */
 					);
 				} else {
-					var germanDate = datetimeString.match(/^(\d{2}).(\d{2}).(\d{4})$/);
+					germanDate = datetimeString.match(/^(\d{2}).(\d{2}).(\d{4})$/);
 					return new Date(
 						germanDate[3],
 						germanDate[2] - 1,

@@ -32,6 +32,6 @@ define(
 			child.extend = parent.extend;
 
 			return child;
-		}
+		};
 	}
 );

@@ -117,7 +117,7 @@ define(
 				this.mainView.renderStatisticResults(data);
 				this.mainView.renderChart(data.priceDevelopmentData);
 
-				$('#load-statistics-button').removeAttr('disabled')
+				$('#load-statistics-button').removeAttr('disabled');
 				$('.loading-spinner').hide();
 			}
 
