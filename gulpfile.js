@@ -13,7 +13,6 @@ var gulp = require('gulp'),
 
 /* using uncss (see https://github.com/giakki/uncss) in order to delete all unused css-rules and classes from the css file. Minifying the css file afterwards. */
 gulp.task('uncssAndMinify', ['compileSassToCss'], function() {
-	/*
 	var fs = require('fs');
 
 	var files = [
@@ -38,11 +37,19 @@ gulp.task('uncssAndMinify', ['compileSassToCss'], function() {
 		'src/resources/templates/menu/menu.html',
 
 		'src/resources/templates/statistic/statistic.html',
-		'src/resources/templates/statistic/statisticResults.html'
+		'src/resources/templates/statistic/statisticResults.html',
+
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html',
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html#entryMap',
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html#entryDetail',
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html#entryDetail/123',
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html#entryCreator',
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html#statistics',
+		'http://localhost/_dev/javascript/requireJs/kleverTanken/src/index.html#imprint'
 	];
 
 	var options = {
-		timeout: 1000
+		timeout: 10000
 	};
 
 	realUncss(files, options, function(error, output) {
@@ -61,14 +68,6 @@ gulp.task('uncssAndMinify', ['compileSassToCss'], function() {
 			.pipe(rename({suffix: '-min'}))
 			.pipe(gulp.dest('target/resources/css'));
 	});
-	*/
-
-	gulp.src('src/resources/css/app.css')
-		.pipe(minifycss({
-			keepSpecialComments: 0
-		}))
-		.pipe(rename({suffix: '-min'}))
-		.pipe(gulp.dest('target/resources/css'));
 });
 
 /* compile SCSS to CSS */
@@ -115,7 +114,7 @@ gulp.task('clean', function() {
 gulp.task('replace', ['copy'], function() {
 	replace({
 		regex: "<link href=\"resources/css/app.css\"",
-		replacement: "<link href=\"resources/css/app-min.css\"",
+		replacement: "<link href=\"resources/css/app-uncss-min.css\"",
 		paths: ['target/index.html']
 	});
 
