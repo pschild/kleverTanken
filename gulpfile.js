@@ -49,6 +49,7 @@ gulp.task('uncssAndMinify', ['compileSassToCss'], function() {
 	];
 
 	var options = {
+		ignore: [/menu/],
 		timeout: 10000
 	};
 
