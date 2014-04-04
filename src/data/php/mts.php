@@ -47,6 +47,7 @@ function extractData($url, $fuelsortProperty) {
 function applyData($fuelsortId, $data) {
 	$count = 0;
 	$mailBody = '';
+	$prices = array();
 	foreach ($data as $entryData) {
 		$locationId = findLocationIdByMtskId($entryData['mtsk_id']);
 		if ($locationId === null) {
@@ -63,6 +64,7 @@ function applyData($fuelsortId, $data) {
 		if ($fuelsortId === 1 && $price <= 1.48) {
 			$location = getLocationById($locationId);
 
+			$prices[] = $price;
 			$mailBody .= $location['name'] . ', ' . $location['street'] . ', ' . $location['city'] . '<br/>Super für <b>' . $price . '</b> (' . $datetime . ')<br/><br/>';
 		}
 
@@ -70,8 +72,7 @@ function applyData($fuelsortId, $data) {
 			. "INSERT INTO `" . ENTRY_TABLE . "` "
 			. "(`locationId`, `fuelsortId`, `price`, `datetime`, `confirmed`, `deleted`, `mts`) "
 			. "VALUES "
-			. "(" . $locationId . ", " . $fuelsortId . ", " . $price . ", '" . $datetime . "', 0, 0, 1)"
-		;
+			. "(" . $locationId . ", " . $fuelsortId . ", " . $price . ", '" . $datetime . "', 0, 0, 1)";
 		mysql_query($sql);
 
 		$count++;
@@ -84,6 +85,9 @@ function applyData($fuelsortId, $data) {
 			'Jetzt günstig Super tanken!',
 			$mailBody
 		);
+
+		$lowestPrice = min($prices);
+		sendPushNotification($lowestPrice);
 	}
 }
 
@@ -91,8 +95,7 @@ function wasAlreadyAdded($locationId, $fuelsortId, $price, $datetime) {
 	$sql = ""
 		. "SELECT `id` "
 		. "FROM `" . ENTRY_TABLE . "` "
-		. "WHERE `locationId` = " . (int) $locationId . " AND `fuelsortId` = " . (int) $fuelsortId . " AND `price` = " . $price . " AND `datetime` = '" . $datetime . "' AND `mts` = 1 "
-	;
+		. "WHERE `locationId` = " . (int) $locationId . " AND `fuelsortId` = " . (int) $fuelsortId . " AND `price` = " . $price . " AND `datetime` = '" . $datetime . "' AND `mts` = 1 ";
 	$result = mysql_query($sql);
 	if ($result !== false) {
 		if (mysql_fetch_assoc($result) !== false) {
@@ -129,4 +132,40 @@ function findLocationIdByMtskId($mtsk_id) {
 	}
 
 	return null;
+}
+
+function sendPushNotification($lowestPrice) {
+	/* see http://stackoverflow.com/a/15704224 */
+
+	$apiKey = 'AIzaSyA0ZzbK_MNREWF6LNktwJhKfxqx4TV_qFg';
+	$registrationId = 'APA91bFFe_ElUmdwkc2D1RJj70lu4DZuo91CnkhVlZSpGVFDneeyT6PTLIGoWw6futhnCFdiooBwlZ-R1ZiUQNbX8WdjY-Q3hVvX0_35daQ2ymOkkLp8z1H553no-TiDVBKHbitigcO9e_g3pIUAG0q819xHs2CePGakqCmZnBIdHdc9BdBOyU4';
+
+	$fields = array(
+		'registration_ids' => array($registrationId),
+		'data' => array(
+			'title' => 'KleverTanken',
+			'message' => 'Jetzt Super ab ' . $lowestPrice . ' tanken!'
+		)
+	);
+
+	$headers = array(
+		'Authorization: key=' . $apiKey,
+		'Content-Type: application/json'
+	);
+
+	$ch = curl_init();
+	curl_setopt($ch, CURLOPT_URL, 'https://android.googleapis.com/gcm/send');
+	curl_setopt($ch, CURLOPT_POST, true);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+
+	$result = curl_exec($ch);
+	if ($result === false) {
+		die('Problem occurred: ' . curl_error($ch));
+	}
+
+	curl_close($ch);
+	echo $result;
 }
