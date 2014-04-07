@@ -138,10 +138,13 @@ function sendPushNotification($lowestPrice) {
 	/* see http://stackoverflow.com/a/15704224 */
 
 	$apiKey = 'AIzaSyA0ZzbK_MNREWF6LNktwJhKfxqx4TV_qFg';
-	$registrationId = 'APA91bFFe_ElUmdwkc2D1RJj70lu4DZuo91CnkhVlZSpGVFDneeyT6PTLIGoWw6futhnCFdiooBwlZ-R1ZiUQNbX8WdjY-Q3hVvX0_35daQ2ymOkkLp8z1H553no-TiDVBKHbitigcO9e_g3pIUAG0q819xHs2CePGakqCmZnBIdHdc9BdBOyU4';
+	$registrationIds = array(
+		'APA91bFFe_ElUmdwkc2D1RJj70lu4DZuo91CnkhVlZSpGVFDneeyT6PTLIGoWw6futhnCFdiooBwlZ-R1ZiUQNbX8WdjY-Q3hVvX0_35daQ2ymOkkLp8z1H553no-TiDVBKHbitigcO9e_g3pIUAG0q819xHs2CePGakqCmZnBIdHdc9BdBOyU4', // Nexus 4
+		'APA91bEcXs9gktNiAcyNNJ06cMKYGjMDPA8PAtmi4H8tkZWIy6mMcB26lqEtEM6cfeNfDO8Kg8M9PgHhhpS-oYx0dRxd3-do5lfBYGRDr-HQJYWL42HmvL5S6McmnRMtj2JK-j7uGZMtHq7hDWoY329YQDCkWjwnxQ' // Incredible S
+	);
 
 	$fields = array(
-		'registration_ids' => array($registrationId),
+		'registration_ids' => $registrationIds,
 		'data' => array(
 			'title' => 'KleverTanken',
 			'message' => 'Jetzt Super ab ' . $lowestPrice . ' tanken!'
