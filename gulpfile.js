@@ -49,7 +49,7 @@ gulp.task('uncssAndMinify', ['compileSassToCss'], function() {
 	];
 
 	var options = {
-		ignore: [/menu/, /dw/, /android/],
+		ignore: [/menu/, /dw/, /android/, /alertify/],
 		timeout: 10000
 	};
 
